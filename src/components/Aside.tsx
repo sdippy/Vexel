@@ -1,14 +1,18 @@
-import { NavLink } from "react-router-dom";
-import Dashboard from "../assets/Icon.svg?react";
-import Markets from "../assets/Icon-1.svg?react";
-import Portfolio from "../assets/Icon-2.svg?react";
-import Watchlist from "../assets/Icon-3.svg?react";
-import News from "../assets/Icon-4.svg?react";
-import Settings from "../assets/Icon-5.svg?react";
+import { NavLink, Link } from "react-router-dom";
+import Dashboard from "../assets/icons_aside/Dashboard_icon.svg?react";
+import Markets from "../assets/icons_aside/Markets_icon.svg?react";
+import Portfolio from "../assets/icons_aside/Portfolio_icon.svg?react";
+import Watchlist from "../assets/icons_aside/Watchlist_icon.svg?react";
+import News from "../assets/icons_aside/News_icon.svg?react";
+import Settings from "../assets/icons_aside/Settings_icon.svg?react";
+import Auth from "../assets/icons_aside/Auth_icon.svg?react";
+import Support from "../assets/icons_aside/Support_icon.svg?react";
 
 export default function Aside() {
   return (
+    // aside
     <div className="w-[280px] flex flex-col border-r-[1px] border-r-white/10">
+      {/* logo */}
       <div className="pl-[24px] pt-[24px] flex flex-col">
         <h2 className="text-[30px] font-bold font-hanken text-[#ADC6FF]">
           VEXEL
@@ -18,7 +22,8 @@ export default function Aside() {
         </p>
       </div>
 
-      <nav className="flex flex-col pt-[40px] gap-[4px]">
+      {/* navigation menu top*/}
+      <nav className="flex flex-1 flex-col pt-[40px] gap-[4px]">
         <NavLink
           to="/Dashboard"
           className={({ isActive }) =>
@@ -103,6 +108,36 @@ export default function Aside() {
           <Settings className="ml-[24px] w-[20px] h-[20px]" />
           <p className="py-[12px]">Settings</p>
         </NavLink>
+      </nav>
+
+      {/* navigation menu bottom*/}
+      <nav className="flex flex-col">
+        <Link
+          to="/Markets"
+          className="text-[#00285D] hover:text-[#00285D] text-center text-[16px] font-normal hover:font-bold font-inter bg-[#ADC6FF] rounded-[8px] py-[12px] mb-[24px] mx-[24px] hover:shadow-[0_0_20px_rgba(173,198,255,0.3)] transition-all duration-200"
+        >
+          <p className="py-[6px]">Trade Now</p>
+        </Link>
+        <div className="flex flex-col pt-[16px] pb-[24px] gap-[4px] border-t-[1px] border-t-white/10">
+          <NavLink
+            to="/Support"
+            className={({ isActive }) =>
+              `flex items-center gap-[16px] text-[16px] font-normal font-inter transition-colors duration-10
+      ${
+        isActive
+          ? "text-[#ADC6FF] border-l-[2px] border-l-[#ADC6FF] bg-[#ffffff] bg-opacity-5"
+          : "text-[#C2C6D6] hover:text-[#ADC6FF] border-l-[2px] border-l-transparent hover:border-l-[2px] hover:border-[#ADC6FF] hover:bg-[#ffffff] hover:bg-opacity-5"
+      }`
+            }
+          >
+            <Support className="ml-[24px] w-[20px] h-[20px]" />
+            <p className="py-[12px]">Support</p>
+          </NavLink>
+          <div className="flex items-center gap-[16px] text-[16px] font-normal font-inter text-[#C2C6D6] hover:text-[#FFB4AB] border-l-[2px] border-l-transparent hover:border-l-[2px] hover:border-[#FFB4AB] hover:bg-[#FFB4AB] hover:bg-opacity-5 transition-colors duration-10 cursor-pointer">
+            <Auth className="ml-[24px] w-[20px] h-[15px]" />
+            <p className="py-[12px]">Log Out</p>
+          </div>
+        </div>
       </nav>
     </div>
   );
