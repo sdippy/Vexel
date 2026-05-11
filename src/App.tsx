@@ -1,8 +1,3 @@
-
 export default function App() {
-  
-  return (
-    <div className={`min-h-screen`}>
-    </div>
-  );
+  return <div className={`min-h-screen`}></div>;
 }
