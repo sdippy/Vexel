@@ -1,4 +1,4 @@
-import { NavLink, Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import Dashboard from "../assets/icons_aside/Dashboard_icon.svg?react";
 import Markets from "../assets/icons_aside/Markets_icon.svg?react";
 import Portfolio from "../assets/icons_aside/Portfolio_icon.svg?react";
@@ -11,7 +11,7 @@ import Support from "../assets/icons_aside/Support_icon.svg?react";
 export default function Aside() {
   return (
     // aside
-    <div className="w-[280px] flex flex-col border-r-[1px] border-r-white/10">
+    <div className="w-[280px] flex flex-col border-r-[1px] border-r-white/10 h-screen">
       {/* logo */}
       <div className="pl-[24px] pt-[24px] flex flex-col">
         <h2 className="text-[30px] font-bold font-hanken text-[#ADC6FF]">
@@ -27,7 +27,7 @@ export default function Aside() {
         <NavLink
           to="/Dashboard"
           className={({ isActive }) =>
-            `flex items-center gap-[16px] text-[16px] font-normal font-inter transition-colors duration-10
+            `flex items-center gap-[16px] text-[16px] font-normal font-inter transition-all duration-200 ease-out
       ${
         isActive
           ? "text-[#ADC6FF] border-l-[2px] border-l-[#ADC6FF] bg-[#ffffff] bg-opacity-5"
@@ -41,7 +41,7 @@ export default function Aside() {
         <NavLink
           to="/Markets"
           className={({ isActive }) =>
-            `flex items-center gap-[16px] text-[16px] font-normal font-inter transition-colors duration-10
+            `flex items-center gap-[16px] text-[16px] font-normal font-inter transition-all duration-200 ease-out
       ${
         isActive
           ? "text-[#ADC6FF] border-l-[2px] border-l-[#ADC6FF] bg-[#ffffff] bg-opacity-5"
@@ -55,7 +55,7 @@ export default function Aside() {
         <NavLink
           to="/Portfolio"
           className={({ isActive }) =>
-            `flex items-center gap-[16px] text-[16px] font-normal font-inter transition-colors duration-10
+            `flex items-center gap-[16px] text-[16px] font-normal font-inter transition-all duration-200 ease-out
       ${
         isActive
           ? "text-[#ADC6FF] border-l-[2px] border-l-[#ADC6FF] bg-[#ffffff] bg-opacity-5"
@@ -69,7 +69,7 @@ export default function Aside() {
         <NavLink
           to="/Watchlist"
           className={({ isActive }) =>
-            `flex items-center gap-[16px] text-[16px] font-normal font-inter transition-colors duration-10
+            `flex items-center gap-[16px] text-[16px] font-normal font-inter transition-all duration-200 ease-out
       ${
         isActive
           ? "text-[#ADC6FF] border-l-[2px] border-l-[#ADC6FF] bg-[#ffffff] bg-opacity-5"
@@ -83,7 +83,7 @@ export default function Aside() {
         <NavLink
           to="/News"
           className={({ isActive }) =>
-            `flex items-center gap-[16px] text-[16px] font-normal font-inter transition-colors duration-10
+            `flex items-center gap-[16px] text-[16px] font-normal font-inter transition-all duration-200 ease-out
       ${
         isActive
           ? "text-[#ADC6FF] border-l-[2px] border-l-[#ADC6FF] bg-[#ffffff] bg-opacity-5"
@@ -97,7 +97,7 @@ export default function Aside() {
         <NavLink
           to="/Settings"
           className={({ isActive }) =>
-            `flex items-center gap-[16px] text-[16px] font-normal font-inter transition-colors duration-10
+            `flex items-center gap-[16px] text-[16px] font-normal font-inter transition-all duration-200 ease-out
       ${
         isActive
           ? "text-[#ADC6FF] border-l-[2px] border-l-[#ADC6FF] bg-[#ffffff] bg-opacity-5"
@@ -112,17 +112,24 @@ export default function Aside() {
 
       {/* navigation menu bottom*/}
       <nav className="flex flex-col">
-        <Link
+        <NavLink
           to="/Markets"
-          className="text-[#00285D] hover:text-[#00285D] text-center text-[16px] font-normal hover:font-bold font-inter bg-[#ADC6FF] rounded-[8px] py-[12px] mb-[24px] mx-[24px] hover:shadow-[0_0_20px_rgba(173,198,255,0.3)] transition-all duration-200"
+          className={({ isActive }) =>
+            `${
+              isActive
+                ? "hidden"
+                : "text-[#00285D] hover:text-[#00285D] text-center text-[16px] font-normal hover:font-bold font-inter bg-[#ADC6FF] rounded-[8px] py-[12px] mb-[24px] mx-[24px] hover:shadow-[0_0_20px_rgba(173,198,255,0.3)] transition-all duration-200"
+            }`
+          }
         >
-          <p className="py-[6px]">Trade Now</p>
-        </Link>
+          Trade Now
+        </NavLink>
+
         <div className="flex flex-col pt-[16px] pb-[24px] gap-[4px] border-t-[1px] border-t-white/10">
           <NavLink
             to="/Support"
             className={({ isActive }) =>
-              `flex items-center gap-[16px] text-[16px] font-normal font-inter transition-colors duration-10
+              `flex items-center gap-[16px] text-[16px] font-normal font-inter transition-all duration-200 ease-out
       ${
         isActive
           ? "text-[#ADC6FF] border-l-[2px] border-l-[#ADC6FF] bg-[#ffffff] bg-opacity-5"
@@ -133,7 +140,7 @@ export default function Aside() {
             <Support className="ml-[24px] w-[20px] h-[20px]" />
             <p className="py-[12px]">Support</p>
           </NavLink>
-          <div className="flex items-center gap-[16px] text-[16px] font-normal font-inter text-[#C2C6D6] hover:text-[#FFB4AB] border-l-[2px] border-l-transparent hover:border-l-[2px] hover:border-[#FFB4AB] hover:bg-[#FFB4AB] hover:bg-opacity-5 transition-colors duration-10 cursor-pointer">
+          <div className="flex items-center gap-[16px] text-[16px] font-normal font-inter text-[#C2C6D6] hover:text-[#FFB4AB] border-l-[2px] border-l-transparent hover:border-l-[2px] hover:border-[#FFB4AB] hover:bg-[#FFB4AB] hover:bg-opacity-5 transition-all duration-200 ease-out cursor-pointer">
             <Auth className="ml-[24px] w-[20px] h-[15px]" />
             <p className="py-[12px]">Log Out</p>
           </div>
