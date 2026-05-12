@@ -11,7 +11,7 @@ import Support from "../assets/icons_aside/Support_icon.svg?react";
 export default function Aside() {
   return (
     // aside
-    <div className="w-[280px] flex flex-col border-r-[1px] border-r-white/10 h-screen">
+    <div className="w-[280px] flex flex-col border-r-[1px] border-r-white/10 h-full">
       {/* logo */}
       <div className="pl-[24px] pt-[24px] flex flex-col">
         <h2 className="text-[30px] font-bold font-hanken text-[#ADC6FF]">

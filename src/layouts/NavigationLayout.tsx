@@ -4,21 +4,31 @@ import Header from "../components/Header";
 
 export function NavigationLayout() {
   return (
-    <div className="relative min-h-screen min-w-full flex bg-[#10131A] bg-[linear-gradient(90deg,rgba(255,255,255,0.01)_3%,rgba(255,255,255,0)_9%),radial-gradient(ellipse_120%_140%_at_55%_1%,rgba(173,198,255,0.08)_0%,rgba(173,198,255,0)_80%),radial-gradient(ellipse_40%_40%_at_70%_70%,rgba(74,225,118,0.02)_0%,rgba(74,225,118,0)_80%),radial-gradient(ellipse_20%_20%_at_95%_5%,rgba(173,198,255,0.03)_0%,rgba(173,198,255,0)_80%)]">
-      {/* SIDEBAR FIXED */}
-      <div className="sticky top-0">
+    <div className="min-h-screen bg-[#10131A]">
+      {/* Градиент — отдельный слой, не перерисовывается при скролле */}
+      <div
+        className="fixed inset-0 z-0 pointer-events-none"
+        style={{
+          background: `
+            linear-gradient(90deg, rgba(255,255,255,0.01) 3%, rgba(255,255,255,0) 9%),
+            radial-gradient(ellipse 120% 140% at 55% 1%, rgba(173,198,255,0.08) 0%, rgba(173,198,255,0) 80%),
+            radial-gradient(ellipse 40% 40% at 70% 70%, rgba(74,225,118,0.02) 0%, rgba(74,225,118,0) 80%),
+            radial-gradient(ellipse 20% 20% at 95% 5%, rgba(173,198,255,0.03) 0%, rgba(173,198,255,0) 80%)
+          `,
+          willChange: "transform", // переносит на отдельный GPU слой
+        }}
+      />
+
+      <aside className="fixed inset-y-0 left-0 z-40 w-[280px]">
         <Aside />
-      </div>
+      </aside>
 
-      {/* MAIN AREA */}
-      <div className="flex-1 flex flex-col h-screen">
-        {/* HEADER FIXED */}
-        <header className="h-[64px] sticky top-0 z-50 bg-[#10131A]/40 backdrop-blur-xl border-b border-t border-white/10">
-          <Header />
-        </header>
+      <header className="fixed top-0 left-[280px] right-0 z-50 h-[64px]  backdrop-blur-xl border-b border-white/10">
+        <Header />
+      </header>
 
-        {/* SCROLLABLE CONTENT */}
-        <main className="flex-1 overflow-y-auto">
+      <div className="relative z-10 ml-[280px] pt-[64px]">
+        <main>
           <Outlet />
         </main>
       </div>
