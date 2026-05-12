@@ -47,11 +47,15 @@ export default function Header() {
           Trade Now
         </NavLink>
         <div className="flex gap-[8px]">
-          <div className="cursor-pointer">
-            <Notification className="w-[16px] h-[20px] text-[#C2C6D6] hover:text-[#ADC6FF] hover:drop-shadow-[0_0_20px_rgba(173,198,255,0.3)] transition-all duration-200" />
+          <div className="relative cursor-pointer w-[16px] h-[20px] hover:-translate-y-[2px] transition-all duration-200">
+            {/* Иконка */}
+            <Notification className="w-[16px] h-[20px] text-[#C2C6D6] hover:text-[#ADC6FF]  hover:drop-shadow-[0_0_20px_rgba(173,198,255,0.3)]" />
+
+            {/* Точка поверх иконки */}
+            <div className="absolute -top-[3px] -right-[3px] w-[8px] h-[8px] rounded-full bg-[#4AE176] shadow-[0_0_8px_rgba(74,225,118,1)] animate-pulse" />
           </div>
           <div className="cursor-pointer">
-            <Services className="w-[18px] h-[18px] text-[#C2C6D6] hover:text-[#ADC6FF] hover:drop-shadow-[0_0_20px_rgba(173,198,255,0.3)] transition-all duration-200" />
+            <Services className="w-[18px] h-[18px] text-[#C2C6D6] hover:text-[#ADC6FF] hover:-translate-y-[2px] hover:drop-shadow-[0_0_20px_rgba(173,198,255,0.3)] transition-all duration-200" />
           </div>
         </div>
         <div className="flex items-center justify-center cursor-pointer w-[36px] h-[36px] rounded-full border-[1px] border-white/20 hover:border-[#ADC6FF] hover:shadow-[0_0_20px_rgba(173,198,255,0.3)] transition-all duration-200 cursor-pointer">

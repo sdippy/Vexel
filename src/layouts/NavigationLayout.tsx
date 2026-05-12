@@ -10,12 +10,15 @@ export function NavigationLayout() {
         className="fixed inset-0 z-0 pointer-events-none"
         style={{
           background: `
-            linear-gradient(90deg, rgba(255,255,255,0.01) 3%, rgba(255,255,255,0) 9%),
-            radial-gradient(ellipse 120% 140% at 55% 1%, rgba(173,198,255,0.08) 0%, rgba(173,198,255,0) 80%),
-            radial-gradient(ellipse 40% 40% at 70% 70%, rgba(74,225,118,0.02) 0%, rgba(74,225,118,0) 80%),
-            radial-gradient(ellipse 20% 20% at 95% 5%, rgba(173,198,255,0.03) 0%, rgba(173,198,255,0) 80%)
-          `,
-          willChange: "transform", // переносит на отдельный GPU слой
+      linear-gradient(90deg, rgba(255,255,255,0.01) 3%, rgba(255,255,255,0) 9%),
+      radial-gradient(ellipse 120% 140% at 55% 1%, rgba(173,198,255,0.08) 0%, rgba(173,198,255,0) 85%),
+      radial-gradient(ellipse 40% 40% at 70% 70%, rgba(74,225,118,0.02) 0%, rgba(74,225,118,0) 85%),
+      radial-gradient(ellipse 20% 20% at 95% 5%, rgba(173,198,255,0.03) 0%, rgba(173,198,255,0) 85%)
+    `,
+          WebkitBackfaceVisibility: "hidden", // устраняет артефакты рендера
+          backfaceVisibility: "hidden",
+          willChange: "transform",
+          transform: "translateZ(0)", // форсирует GPU слой в Safari
         }}
       />
 
@@ -23,12 +26,18 @@ export function NavigationLayout() {
         <Aside />
       </aside>
 
-      <header className="fixed top-0 left-[280px] right-0 z-50 h-[64px]  backdrop-blur-xl border-b border-white/10">
+      <header
+        className="fixed top-0 left-[280px] right-0 z-50 h-[64px] border-b border-white/10"
+        style={{
+          backdropFilter: "blur(20px)",
+          WebkitBackdropFilter: "blur(20px)", // Safari
+        }}
+      >
         <Header />
       </header>
 
       <div className="relative z-10 ml-[280px] pt-[64px]">
-        <main>
+        <main className="p-10">
           <Outlet />
         </main>
       </div>
