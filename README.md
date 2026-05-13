@@ -1,73 +1,77 @@
-# React + TypeScript + Vite
+# Vexel
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Проект Vexel — это React-приложение на TypeScript, собранное с помощью Vite и стилизованное через Tailwind CSS.
 
-Currently, two official plugins are available:
+## Технологический стек
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- React 19
+- TypeScript 6
+- Vite 8
+- Tailwind CSS 3
+- PostCSS
+- ESLint
+- React Router DOM 7
+- Zustand
+- Framer Motion
+- Axios
+- lightweight-charts
+- SVGR для импорта SVG как React-компонентов
+- Lucide React и @web3icons/react для иконок
 
-## React Compiler
+## Основные плагины и пакеты
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Vite
+- `@vitejs/plugin-react` — поддержка React и fast refresh
+- `vite-plugin-svgr` — импорт SVG как React-компоненты
 
-## Expanding the ESLint configuration
+### Стилизация
+- `tailwindcss` — утилитарный CSS-фреймворк
+- `postcss` и `autoprefixer` — обработка CSS
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### Линтинг и типизация
+- `eslint` и `@eslint/js`
+- `eslint-plugin-react-hooks`
+- `eslint-plugin-react-refresh`
+- `typescript`
+- `@types/react`, `@types/react-dom`, `@types/react-router-dom`, `@types/node`
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Скрипты
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+- `npm run dev` — запуск дев-сервера Vite
+- `npm run build` — билд TypeScript + Vite
+- `npm run lint` — запуск ESLint по проекту
+- `npm run preview` — запуск предварительного просмотра собранного билда
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## Папки и файлы конфигурации
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+- `vite.config.ts` — Vite-конфигурация с подключенными плагинами `@vitejs/plugin-react` и `vite-plugin-svgr`
+- `tsconfig.json` — корневой TypeScript-конфиг, который собирает `tsconfig.app.json` и `tsconfig.node.json`
+- `tailwind.config.js` — конфигурация Tailwind CSS
+- `postcss.config.js` — конфигурация PostCSS
+- `eslint.config.js` — правила ESLint для проекта
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Зависимости проекта
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- `react`, `react-dom`
+- `react-router-dom`
+- `zustand`
+- `axios`
+- `framer-motion`
+- `lightweight-charts`
+- `lucide-react`
+- `@web3icons/react`
+
+## Быстрый старт
+
+1. Установить зависимости:
+   ```bash
+   npm install
+   ```
+2. Запустить проект в режиме разработки:
+   ```bash
+   npm run dev
+   ```
+3. Собрать релизную версию:
+   ```bash
+   npm run build
+   ```
