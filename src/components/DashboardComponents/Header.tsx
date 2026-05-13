@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
-import Find from "../assets/icons_header/Find_icon.svg?react";
-import Notification from "../assets/icons_header/Notification_icon.svg?react";
-import Services from "../assets/icons_header/Services_icon.svg?react";
+import Find from "../../assets/icons_header/Find_icon.svg?react";
+import Notification from "../../assets/icons_header/Notification_icon.svg?react";
+import Services from "../../assets/icons_header/Services_icon.svg?react";
 
 const avatar = "/Profile_img.jpeg";
 

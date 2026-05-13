@@ -1,11 +1,13 @@
-import LatencyAPI from "../components/LatensyAPI";
+import TopRowDashboard from "../components/DashboardComponents/TopRowDashboard";
+import SecondRowDashboard from "../components/DashboardComponents/SecondRowDashboard";
+import TopMovers from "../components/DashboardComponents/TopMovers";
 
 export default function Dashboard() {
   return (
-    <div className="h-screen ">
-      312321321312 21321312
-      <div className="w-[100px] h-[100px] bg-violet-800"></div>
-      <LatencyAPI />
+    <div className="flex flex-col gap-[24px]">
+      <TopRowDashboard />
+      <SecondRowDashboard />
+      <TopMovers />
     </div>
   );
 }
