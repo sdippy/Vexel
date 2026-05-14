@@ -21,14 +21,17 @@
 ## Основные плагины и пакеты
 
 ### Vite
+
 - `@vitejs/plugin-react` — поддержка React и fast refresh
 - `vite-plugin-svgr` — импорт SVG как React-компоненты
 
 ### Стилизация
+
 - `tailwindcss` — утилитарный CSS-фреймворк
 - `postcss` и `autoprefixer` — обработка CSS
 
 ### Линтинг и типизация
+
 - `eslint` и `@eslint/js`
 - `eslint-plugin-react-hooks`
 - `eslint-plugin-react-refresh`
@@ -61,17 +64,28 @@
 - `lucide-react`
 - `@web3icons/react`
 
-## Быстрый старт
+## Структура проекта
 
-1. Установить зависимости:
-   ```bash
-   npm install
-   ```
-2. Запустить проект в режиме разработки:
-   ```bash
-   npm run dev
-   ```
-3. Собрать релизную версию:
-   ```bash
-   npm run build
-   ```
+```
+src/
+├── app/                    # Глобальные настройки приложения
+│   ├── App.tsx
+│   ├── main.tsx
+│   └── index.css
+├── pages/                  # Страницы приложения
+│   └── Dashboard.tsx
+├── features/               # Фичи приложения (пока пустые, для будущих расширений)
+├── shared/                 # Общие ресурсы
+│   ├── components/         # Переиспользуемые компоненты
+│   │   ├── ui/            # UI-компоненты (DashboardComponents, MarketComponents, etc.)
+│   │   └── layout/        # Layout-компоненты (NavigationLayout)
+│   ├── hooks/             # Общие хуки (пусто)
+│   ├── utils/             # Утилиты (пусто)
+│   ├── types/             # Глобальные типы (пусто)
+│   ├── services/          # API-сервисы (пусто)
+│   └── assets/            # Ассеты (иконки, изображения)
+├── router/                # Маршрутизация
+│   └── index.tsx
+└── store/                 # Глобальное состояние
+    └── info
+```

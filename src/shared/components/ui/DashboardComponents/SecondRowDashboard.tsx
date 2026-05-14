@@ -1,5 +1,5 @@
 import CandlestickChart from "./CandlestickChart";
-import WatchlistPanel from "./WatchlistPanel";
+import WatchlistPanel from "../watchlist/WatchlistPanel";
 
 export default function SecondRowDashboard() {
   return (

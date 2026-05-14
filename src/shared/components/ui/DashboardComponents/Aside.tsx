@@ -1,12 +1,12 @@
 import { NavLink } from "react-router-dom";
-import Dashboard from "../../assets/icons_aside/Dashboard_icon.svg?react";
-import Markets from "../../assets/icons_aside/Markets_icon.svg?react";
-import Portfolio from "../../assets/icons_aside/Portfolio_icon.svg?react";
-import Watchlist from "../../assets/icons_aside/Watchlist_icon.svg?react";
-import News from "../../assets/icons_aside/News_icon.svg?react";
-import Settings from "../../assets/icons_aside/Settings_icon.svg?react";
-import Auth from "../../assets/icons_aside/Auth_icon.svg?react";
-import Support from "../../assets/icons_aside/Support_icon.svg?react";
+import Dashboard from "@/shared/assets/icons_aside/Dashboard_icon.svg?react";
+import Markets from "@/shared/assets/icons_aside/Markets_icon.svg?react";
+import Portfolio from "@/shared/assets/icons_aside/Portfolio_icon.svg?react";
+import Watchlist from "@/shared/assets/icons_aside/Watchlist_icon.svg?react";
+import News from "@/shared/assets/icons_aside/News_icon.svg?react";
+import Settings from "@/shared/assets/icons_aside/Settings_icon.svg?react";
+import Auth from "@/shared/assets/icons_aside/Auth_icon.svg?react";
+import Support from "@/shared/assets/icons_aside/Support_icon.svg?react";
 
 export default function Aside() {
   return (

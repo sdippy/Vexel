@@ -1,5 +1,5 @@
-import MarketMovers from "./MarketMovers";
-import MarketIntelligence from "./MarketIntelligence";
+import MarketMovers from "../market-movers/MarketMovers";
+import MarketIntelligence from "../market-intelligence/MarketIntelligence";
 
 export default function TopMovers() {
   return (

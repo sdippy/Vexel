@@ -1,5 +1,5 @@
 import HeroCard from "./HeroCard";
-import PortfolioCard from "./PortfolioCard";
+import PortfolioCard from "../portfolio/PortfolioCard";
 
 export default function TopRowDashboard() {
   return (

@@ -1,5 +1,5 @@
 import WatchlistPanelList from "./WatchlistPanelList";
-import PlusIcon from "../../assets/icon_utils/Plus_icon.svg?react";
+import PlusIcon from "@/shared/assets/icon_utils/Plus_icon.svg?react";
 
 export default function WatchlistPanel() {
   return (
