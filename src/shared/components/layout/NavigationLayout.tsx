@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
-import Aside from "../ui/DashboardComponents/Aside";
-import Header from "../ui/DashboardComponents/Header";
+import Aside from "../ui/dashboard/Aside";
+import Header from "../ui/dashboard/Header";
 
 export function NavigationLayout() {
   return (

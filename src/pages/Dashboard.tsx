@@ -1,6 +1,6 @@
-import TopRowDashboard from "../shared/components/ui/DashboardComponents/TopRowDashboard";
-import SecondRowDashboard from "../shared/components/ui/DashboardComponents/SecondRowDashboard";
-import TopMovers from "../shared/components/ui/DashboardComponents/TopMovers";
+import TopRowDashboard from "../shared/components/ui/dashboard/TopRowDashboard";
+import SecondRowDashboard from "../shared/components/ui/dashboard/SecondRowDashboard";
+import TopMovers from "../shared/components/ui/dashboard/TopMovers";
 
 export default function Dashboard() {
   return (
