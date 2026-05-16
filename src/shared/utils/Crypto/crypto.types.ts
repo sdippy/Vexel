@@ -27,6 +27,7 @@ export type CryptoAlias = string;
 export type CryptoIcon = ComponentType<any>;
 
 export type CryptoTheme = {
+  color: string;
   bgColor: string;
   borderColor: string;
 };

@@ -4,10 +4,19 @@ import {
   ColorType,
   createChart,
 } from "lightweight-charts";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function CandlestickChart() {
   const chartContainerRef = useRef<HTMLDivElement>(null);
+  const [animated, setAnimated] = useState(false);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setAnimated(true);
+    }, 100);
+
+    return () => clearTimeout(timeout);
+  }, []);
 
   useEffect(() => {
     if (!chartContainerRef.current) return;
@@ -179,12 +188,26 @@ export default function CandlestickChart() {
       <div
         className="h-full px-[32px] py-[24px] rounded-[12px]"
         style={{
-          WebkitBackfaceVisibility: "hidden", // устраняет артефакты рендера
+          WebkitBackfaceVisibility: "hidden",
           backfaceVisibility: "hidden",
           willChange: "transform",
-          transform: "translateZ(0)", // форсирует GPU слой в Safari
+          transform: "translateZ(0)",
+          opacity: animated ? 1 : 0,
+          animation: animated ? "slideUp 0.8s ease-out forwards" : "none",
         }}
       >
+        <style>{`
+          @keyframes slideUp {
+            from {
+              opacity: 0;
+              transform: translateY(20px);
+            }
+            to {
+              opacity: 1;
+              transform: translateY(0);
+            }
+          }
+        `}</style>
         <div className=" h-full flex flex-col">
           {/* HEADER */}
           <div className="flex items-center justify-between mb-[10px]">
@@ -238,6 +261,10 @@ export default function CandlestickChart() {
             <div
               ref={chartContainerRef}
               className="w-full h-full border-l border-b border-[rgba(255,255,255,0.1)]"
+              style={{
+                filter:
+                  "drop-shadow(0px 4px 12px rgba(74, 225, 117, 0.2)) drop-shadow(0px 0px 8px rgba(74, 225, 117, 0.1))",
+              }}
             />
           </div>
         </div>

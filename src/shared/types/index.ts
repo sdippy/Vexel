@@ -1,4 +1,4 @@
-export type { WatchlistItem } from "./watchlist";
+export type { WatchlistItem } from "./itemStructureProps";
 export * from "../utils/market/getPriceChange";
 export { getSparklinePoints } from "../utils/market/getSparklinePoints";
 export * from "../utils/Crypto/crypto.types";

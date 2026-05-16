@@ -4,7 +4,7 @@ const data = [
   {
     id: 1,
     nameCoin: "BTC",
-    priceData: [10, 30, 20, 50, 70, 5],
+    priceData: [10, 30, 20, 50, 100, 90],
   },
   {
     id: 2,
@@ -17,12 +17,12 @@ const data = [
     priceData: [10, 30, 20, 50, 70],
   },
   {
-    id: 3,
+    id: 4,
     nameCoin: "TON",
     priceData: [10, 30, 20, 50, 70],
   },
   {
-    id: 3,
+    id: 5,
     nameCoin: "XRP",
     priceData: [10, 30, 20, 50, 70],
   },
