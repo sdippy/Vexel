@@ -12,7 +12,7 @@ export const router = createBrowserRouter([
         element: <Navigate to="/Dashboard" replace />,
       },
       {
-        path: "dashboard",
+        path: "Dashboard",
         element: <Dashboard />,
       },
     ],
