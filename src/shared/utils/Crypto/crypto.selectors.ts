@@ -20,6 +20,7 @@ export function getCryptoIcon(name: string) {
 const defaultTheme: CryptoTheme = {
   bgColor: "rgba(156, 163, 175, 0.12)",
   borderColor: "rgba(156, 163, 175, 0.3)",
+  color: "rgba(156, 163, 175, 1)",
 };
 
 export function getCryptoTheme(name: string): CryptoTheme {
