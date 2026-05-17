@@ -8,6 +8,7 @@ import {
   getPriceChange,
   getPriceColor,
   getCryptoTheme,
+  getCurrentPriceFormat,
 } from "@/shared/types";
 
 type WatchlistPanelCardProps = Omit<WatchlistItem, "id">;
@@ -27,11 +28,13 @@ export default function WatchlistPanelCard({
     getPreviousPrice(priceData),
   );
 
+  const price = getCurrentPriceFormat(priceData);
+
   const theme = getCryptoTheme(nameCoin);
   return (
     <NavLink
       to="/Markets"
-      className="w-full h-[82px] border-[1px] border-white/10 rounded-[12px] flex flex-col  w-full bg-white/[.03] shadow-[0_8_32px_rgba(0,0,0,0.37)] cursor-pointer hover:-translate-y-[2px] hover:shadow-[0_0_20px_rgba(173,198,255,0.3)] transition-all duration-200"
+      className="w-full h-[82px] border-[1px] border-white/10 rounded-[12px] flex flex-col  w-full bg-white/[.03] shadow-[0_8_32px_rgba(0,0,0,0.37)] hover:-translate-y-[2px] hover:shadow-[0_0_20px_rgba(173,198,255,0.3)] transition-all duration-200"
     >
       <div
         className="h-full px-5 py-[16px] rounded-[12px]"
@@ -64,7 +67,7 @@ export default function WatchlistPanelCard({
             <p
               className={`text-[16px] font-normal font-jetbrainsmono ${priceColor}`}
             >
-              ${priceData.at(-1)}
+              ${price}
             </p>
             <SparklineChart chartData={priceData} />
           </div>

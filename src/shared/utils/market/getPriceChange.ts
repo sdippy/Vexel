@@ -2,6 +2,13 @@ export function getCurrentPrice(data: number[]) {
   return data[data.length - 1];
 }
 
+export function getCurrentPriceFormat(data: number[]) {
+  return data[data.length - 1].toLocaleString("fr-FR", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  });
+}
+
 export function getPreviousPrice(data: number[]) {
   return data[data.length - 2];
 }

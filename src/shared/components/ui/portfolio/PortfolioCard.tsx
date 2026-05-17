@@ -20,7 +20,7 @@ export default function PortfolioCard() {
               TOTAL BALANCE
             </h2>
             <p className="text-[24px] font-normal font-jetbrainsmono text-[#E1E2EC]">
-              $24,521.10
+              $24 521,10
             </p>
             <p className="text-[13px] font-medium font-inter text-[#4AE176] leading-none">
               +12.3% this month
