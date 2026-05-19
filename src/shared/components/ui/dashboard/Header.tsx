@@ -1,10 +1,12 @@
 import { NavLink } from "react-router-dom";
 import { useRef, useState } from "react";
+import { motion } from "framer-motion";
 import Find from "@/shared/assets/icons_header/Find_icon.svg?react";
 import Notification from "@/shared/assets/icons_header/Notification_icon.svg?react";
 import Services from "@/shared/assets/icons_header/Services_icon.svg?react";
-
-const avatar = "/Profile_img.jpeg";
+import ProfilePopover from "../popover/ProfilePopover";
+import NotificationPopover from "../popover/NotificationPopover";
+import { usePopoverMenuStore } from "@/shared/types";
 
 export default function Header() {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -22,13 +24,20 @@ export default function Header() {
     }
   };
 
+  const avatar = "/Profile_img.jpeg";
+
+  const { togglePopover } = usePopoverMenuStore();
+
+  const buttonRefProfile = useRef<HTMLButtonElement>(null);
+  const buttonRefNotification = useRef<HTMLButtonElement>(null);
+
   return (
     <div className="flex items-center h-full w-full px-[33px]">
       <nav className="flex flex-1 gap-[24px]">
-        <div
-          className={`flex items-center gap-[13px] bg-[#191B23]  border border-[#ADC6FF] hover:shadow-[0_0_20px_rgba(173,198,255,0.3)] ${
-            isSearchOpen ? "w-[256px]" : "w-[40px]"
-          } h-[32px] rounded-full border-b border-white/10 hover:border-[#ADC6FF] hover:shadow-[0_0_20px_rgba(173,198,255,0.3)] focus-within:border-[#ADC6FF] focus-within:shadow-[0_0_20px_rgba(173,198,255,0.3)] transition-all duration-200 cursor-pointer`}
+        <motion.div
+          animate={{ width: isSearchOpen ? 256 : 40 }}
+          transition={{ duration: 0.1, ease: "easeOut" }}
+          className={`flex items-center gap-[13px] bg-[#191B23]  border border-[#ADC6FF] hover:shadow-[0_0_20px_rgba(173,198,255,0.3)] h-[32px] rounded-full border-b border-white/10 hover:border-[#ADC6FF] hover:shadow-[0_0_20px_rgba(173,198,255,0.3)] focus-within:border-[#ADC6FF] focus-within:shadow-[0_0_20px_rgba(173,198,255,0.3)] transition-all duration-200 cursor-pointer`}
           onClick={openSearch}
         >
           <Find className="w-[15px] h-[20px] text-[#C2C6D6] ml-[12px]" />
@@ -44,7 +53,7 @@ export default function Header() {
               className="text-[14px] w-full font-normal font-inter placeholder:text-[#6B7280] text-[#C2C6D6] bg-transparent appearance-none outline-none border-none ring-0 focus:ring-0 focus:outline-none"
             />
           )}
-        </div>
+        </motion.div>
         <div className="flex items-center gap-[16px] border-l-[1px] border-white/10 pl-[24px]">
           <div className="flex gap-[5px] justify-center text-[16px] font-normal font-jetbrainsmono text-[#4AE176]">
             <p>BTC/USD</p>
@@ -73,26 +82,36 @@ export default function Header() {
         >
           Trade Now
         </NavLink>
-        <div className="flex gap-[8px]">
-          <div className="relative cursor-pointer w-[16px] h-[20px] hover:-translate-y-[2px] transition-all duration-200">
+        <div className="flex gap-[15px]">
+          <button
+            ref={buttonRefNotification}
+            onClick={() => togglePopover("notification")}
+            className="relative cursor-pointer w-[16px] h-[20px] hover:-translate-y-[2px] transition-all duration-200"
+          >
             {/* Иконка */}
             <Notification className="w-[16px] h-[20px] text-[#C2C6D6] hover:text-[#ADC6FF]  hover:drop-shadow-[0_0_20px_rgba(173,198,255,0.3)]" />
 
             {/* Точка поверх иконки */}
-            <div className="absolute -top-[3px] -right-[3px] w-[8px] h-[8px] rounded-full bg-[#4AE176] shadow-[0_0_8px_rgba(74,225,118,1)] animate-pulse" />
-          </div>
+            <div className="absolute -top-[4px] -right-[4px] w-[8px] h-[8px] rounded-full bg-[#FFB4AB] shadow-[0_0_8px_rgba(255,180,171,1)] animate-pulse" />
+          </button>
           <div className="cursor-pointer">
             <Services className="w-[18px] h-[18px] text-[#C2C6D6] hover:text-[#ADC6FF] hover:-translate-y-[2px] hover:drop-shadow-[0_0_20px_rgba(173,198,255,0.3)] transition-all duration-200" />
           </div>
         </div>
-        <div className="flex items-center justify-center cursor-pointer w-[36px] h-[36px] rounded-full border-[1px] border-white/20 hover:border-[#ADC6FF] hover:shadow-[0_0_20px_rgba(173,198,255,0.3)] transition-all duration-200 cursor-pointer">
+        <button
+          ref={buttonRefProfile}
+          onClick={() => togglePopover("profile")}
+          className="flex items-center justify-center cursor-pointer w-[36px] h-[36px] rounded-full border-[1px] border-white/20 hover:border-[#ADC6FF] hover:shadow-[0_0_20px_rgba(173,198,255,0.3)] transition-all duration-200 cursor-pointer"
+        >
           <img
             src={avatar}
             alt="Profile"
             className="w-[32px] h-[32px] rounded-full object-cover"
           />
-        </div>
+        </button>
       </nav>
+      <ProfilePopover anchorRef={buttonRefProfile} />
+      <NotificationPopover anchorRef={buttonRefNotification} />
     </div>
   );
 }

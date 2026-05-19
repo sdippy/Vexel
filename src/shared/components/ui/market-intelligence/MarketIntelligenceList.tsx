@@ -6,7 +6,7 @@ const data = [
     label: "SEC Approves Strategic Bitcoin Reserve Framework",
     timeToRead: "5 min read",
     typeTopic: "BULLISH",
-    timeCreated: "05.05.2026",
+    timeCreated: "2026-05-19 21:07 UTC+3",
     imgTopic: "/1test.png",
   },
   {
@@ -14,7 +14,7 @@ const data = [
     label: "Ethereum Layer-2 Activity Hits All-Time Highs Post - Upgrade",
     timeToRead: "3 min read",
     typeTopic: "NEUTRAL",
-    timeCreated: "15.05.2026",
+    timeCreated: "2026-05-18 21:07 UTC+3",
     imgTopic: "/2test.png",
   },
 ];

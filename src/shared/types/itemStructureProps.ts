@@ -20,3 +20,12 @@ export type MarketIntelligence = {
   timeCreated: string;
   imgTopic: string;
 };
+
+export type NotificationItem = {
+  id: number;
+  type: string;
+  title: string;
+  description: string;
+  volatility: string;
+  date: string;
+};

@@ -1,6 +1,9 @@
 import type { MarketIntelligence } from "@/shared/types";
 import { NavLink } from "react-router-dom";
-import { getNewsMarketSentimentTheme } from "@/shared/types";
+import {
+  getNewsMarketSentimentTheme,
+  formatShortTimeAgo,
+} from "@/shared/types";
 
 type MarketIntelligenceCardProps = Omit<MarketIntelligence, "id">;
 
@@ -39,7 +42,7 @@ export default function MarketIntelligenceCard({
               {typeTopic}
             </p>
             <p className="text-[12px] font-normal font-inter text-[#C2C6D6]">
-              {timeCreated}
+              {formatShortTimeAgo(timeCreated)}
             </p>
           </div>
           <div className="flex-1">

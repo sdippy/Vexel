@@ -9,7 +9,7 @@ type Asset = {
 const assets: Asset[] = [
   {
     nameCoin: "BTC",
-    percent: 70,
+    percent: 40,
   },
   {
     nameCoin: "ETH",
@@ -19,6 +19,19 @@ const assets: Asset[] = [
     nameCoin: "SOL",
     percent: 4,
   },
+  {
+    nameCoin: "ADA",
+    percent: 1,
+  },
+  {
+    nameCoin: "USDT",
+    percent: 20,
+  },
+  {
+    nameCoin: "XRP",
+    percent: 5,
+  },
+  { nameCoin: "DOGE", percent: 5 },
 ];
 
 export default function PortfolioDonutChart() {
@@ -37,10 +50,14 @@ export default function PortfolioDonutChart() {
 
   const radius = (size - strokeWidth) / 2;
 
-  const total = assets.reduce((sum, asset) => sum + asset.percent, 0);
+  const sortedAssets = useMemo(() => {
+    return [...assets].sort((a, b) => b.percent - a.percent);
+  }, []);
+
+  const total = sortedAssets.reduce((sum, asset) => sum + asset.percent, 0);
 
   const animatedAssets = useMemo(() => {
-    return assets.map((asset) => ({
+    return sortedAssets.map((asset) => ({
       ...asset,
       normalizedPercent: animated ? (asset.percent / total) * 100 : 0,
       displayPercent: Math.round((asset.percent / total) * 100),
@@ -48,14 +65,14 @@ export default function PortfolioDonutChart() {
         cryptoRegistry[asset.nameCoin as keyof typeof cryptoRegistry]?.theme
           .color || "#999",
     }));
-  }, [animated, total]);
+  }, [animated, total, sortedAssets]);
 
   let accumulated = 0;
 
   return (
     <div className="w-full h-full flex items-center justify-center gap-[24px] overflow-hidden">
       {/* chart */}
-      <div className="relative flex items-center justify-center">
+      <div className="relative flex items-center justify-center hover:rotate-180 transition-all duration-[1400ms] ease-out">
         {/* glow */}
         <div className="absolute w-[128px] h-[128px] rounded-full" />
 
@@ -80,7 +97,7 @@ export default function PortfolioDonutChart() {
                 pathLength="100"
                 strokeDasharray={`${dash} ${100 - dash}`}
                 strokeDashoffset={offset}
-                className="transition-all duration-[1800ms] ease-out"
+                className="transition-all duration-[1000ms] ease-out"
                 style={{
                   filter: `drop-shadow(0px 0px 12px ${asset.color})`,
                 }}
@@ -102,14 +119,14 @@ export default function PortfolioDonutChart() {
       </div>
 
       {/* legend */}
-      <div className="flex flex-col gap-[14px]">
+      <div className="flex flex-col gap-[14px] h-[100px] w-[140px] pl-5 overflow-y-auto">
         {animatedAssets.map((asset) => (
           <div key={asset.nameCoin} className="flex items-center gap-[8px]">
             <div
               className="w-[8px] h-[8px] rounded-full"
               style={{
                 background: asset.color,
-                boxShadow: `0 0 12px ${asset.color}`,
+                boxShadow: `0 0 5px ${asset.color}`,
               }}
             />
 

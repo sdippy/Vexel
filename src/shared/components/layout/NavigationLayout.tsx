@@ -1,4 +1,5 @@
 import { Outlet } from "react-router-dom";
+import { AnimatePresence, motion } from "framer-motion";
 import Aside from "../ui/dashboard/Aside";
 import Header from "../ui/dashboard/Header";
 
@@ -37,9 +38,18 @@ export function NavigationLayout() {
       </header>
 
       <div className="relative z-10 ml-[280px] pt-[64px]">
-        <main className="p-10">
-          <Outlet />
-        </main>
+        <AnimatePresence mode="wait">
+          <motion.main
+            key={location.pathname}
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.05, ease: "easeOut" }}
+            className="p-10"
+          >
+            <Outlet />
+          </motion.main>
+        </AnimatePresence>
       </div>
     </div>
   );
