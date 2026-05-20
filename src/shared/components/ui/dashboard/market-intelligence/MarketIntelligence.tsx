@@ -2,7 +2,7 @@ import MarketIntelligenceCard from "./MarketIntelligenceCard";
 import { useMarketIntelligence } from "@/shared/hooks/useMarketIntelligence";
 
 export default function MarketIntelligence() {
-  const { data = [], isLoading, isFetching, error } = useMarketIntelligence(2);
+  const { data = [] } = useMarketIntelligence(2);
 
   return (
     <div className="w-4/6 flex flex-col gap-[17px]">
