@@ -1,6 +1,6 @@
 # Vexel
 
-Проект Vexel — это React-приложение на TypeScript, собранное с помощью Vite и стилизованное через Tailwind CSS.
+Vexel — это React-приложение на TypeScript, собранное с помощью Vite и стилизованное через Tailwind CSS. Приложение предназначено для анализа криптовалютных рынков с интеграцией бэкенда на Express + Prisma.
 
 ## Технологический стек
 
@@ -17,6 +17,10 @@
 - lightweight-charts
 - SVGR для импорта SVG как React-компонентов
 - Lucide React и @web3icons/react для иконок
+- date-fns
+- Express 5
+- Prisma 6 + Prisma Client
+- @tanstack/react-query
 
 ## Основные плагины и пакеты
 
@@ -30,13 +34,20 @@
 - `tailwindcss` — утилитарный CSS-фреймворк
 - `postcss` и `autoprefixer` — обработка CSS
 
+### Бэкенд
+
+- `express` — серверный фреймворк
+- `cors` — CORS-заголовки
+- `prisma` — ORM для работы с базой данных
+- `@prisma/client` — клиент Prisma
+
 ### Линтинг и типизация
 
 - `eslint` и `@eslint/js`
 - `eslint-plugin-react-hooks`
 - `eslint-plugin-react-refresh`
 - `typescript`
-- `@types/react`, `@types/react-dom`, `@types/react-router-dom`, `@types/node`
+- `@types/react`, `@types/react-dom`, `@types/react-router-dom`, `@types/express`, `@types/cors`, `@types/node`
 
 ## Скрипты
 
@@ -52,6 +63,8 @@
 - `tailwind.config.js` — конфигурация Tailwind CSS
 - `postcss.config.js` — конфигурация PostCSS
 - `eslint.config.js` — правила ESLint для проекта
+- `prisma.config.ts` — конфигурация Prisma
+- `prisma/schema.prisma` — схема базы данных
 
 ## Зависимости проекта
 
@@ -63,6 +76,10 @@
 - `lightweight-charts`
 - `lucide-react`
 - `@web3icons/react`
+- `date-fns`
+- `@tanstack/react-query`
+- `express`, `cors`
+- `prisma`, `@prisma/client`
 
 ## Структура проекта
 
@@ -74,18 +91,30 @@ src/
 │   └── index.css
 ├── pages/                  # Страницы приложения
 │   └── Dashboard.tsx
-├── features/               # Фичи приложения (пока пустые, для будущих расширений)
+├── features/               # Фичи приложения
 ├── shared/                 # Общие ресурсы
 │   ├── components/         # Переиспользуемые компоненты
-│   │   ├── ui/            # UI-компоненты (DashboardComponents, MarketComponents, etc.)
+│   │   ├── ui/            # UI-компоненты (dashboard)
 │   │   └── layout/        # Layout-компоненты (NavigationLayout)
-│   ├── hooks/             # Общие хуки (пусто)
-│   ├── utils/             # Утилиты (пусто)
-│   ├── types/             # Глобальные типы (пусто)
-│   ├── services/          # API-сервисы (пусто)
-│   └── assets/            # Ассеты (иконки, изображения)
-├── router/                # Маршрутизация
+│   ├── hooks/              # Общие хуки
+│   │   └── useMarketIntelligence.ts
+│   ├── utils/              # Утилиты
+│   ├── types/              # Глобальные типы
+│   │   ├── index.ts
+│   │   └── itemStructureProps.ts
+│   ├── services/           # API-сервисы
+│   │   └── fetchMarketIntelligience.ts
+│   └── assets/             # Ассеты (иконки, изображения)
+├── router/                 # Маршрутизация
 │   └── index.tsx
-└── store/                 # Глобальное состояние
-    └── info
+├── server/                 # Серверная часть
+│   ├── server.ts
+│   ├── controllers/
+│   ├── routes/
+│   ├── services/
+│   └── db/
+│       └── prisma.ts
+└── store/                  # Глобальное состояние
+    ├── modal.store.ts
+    └── popover.store.ts
 ```

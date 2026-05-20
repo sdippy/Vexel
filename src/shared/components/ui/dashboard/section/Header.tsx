@@ -3,7 +3,6 @@ import { useRef, useState } from "react";
 import { motion } from "framer-motion";
 import Find from "@/shared/assets/icons_header/Find_icon.svg?react";
 import Notification from "@/shared/assets/icons_header/Notification_icon.svg?react";
-import Services from "@/shared/assets/icons_header/Services_icon.svg?react";
 import ProfilePopover from "../popover/ProfilePopover";
 import NotificationPopover from "../popover/NotificationPopover";
 import { usePopoverMenuStore } from "@/shared/types";
@@ -60,11 +59,11 @@ export default function Header() {
             <p>$64,231</p>
           </div>
           <div className="flex gap-[5px] justify-center text-[16px] font-normal font-jetbrainsmono text-[#C2C6D6]">
-            <p>BTC/USD</p>
+            <p>ETH/USD</p>
             <p>$64,231</p>
           </div>
           <div className="flex gap-[5px] justify-center text-[16px] font-normal font-jetbrainsmono text-[#C2C6D6]">
-            <p>BTC/USD</p>
+            <p>SOL/USD</p>
             <p>$64,231</p>
           </div>
         </div>
@@ -94,9 +93,6 @@ export default function Header() {
             {/* Точка поверх иконки */}
             <div className="absolute -top-[4px] -right-[4px] w-[8px] h-[8px] rounded-full bg-[#FFB4AB] shadow-[0_0_8px_rgba(255,180,171,1)] animate-pulse" />
           </button>
-          <div className="cursor-pointer">
-            <Services className="w-[18px] h-[18px] text-[#C2C6D6] hover:text-[#ADC6FF] hover:-translate-y-[2px] hover:drop-shadow-[0_0_20px_rgba(173,198,255,0.3)] transition-all duration-200" />
-          </div>
         </div>
         <button
           ref={buttonRefProfile}

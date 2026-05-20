@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
-import Aside from "../ui/dashboard/Aside";
-import Header from "../ui/dashboard/Header";
+import Aside from "../ui/dashboard/section/Aside";
+import Header from "../ui/dashboard/section/Header";
 
 export function NavigationLayout() {
   return (

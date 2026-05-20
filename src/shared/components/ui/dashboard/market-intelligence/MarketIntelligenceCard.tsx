@@ -4,6 +4,7 @@ import {
   getNewsMarketSentimentTheme,
   formatShortTimeAgo,
 } from "@/shared/types";
+import { Clock } from "lucide-react";
 
 type MarketIntelligenceCardProps = Omit<MarketIntelligence, "id">;
 
@@ -51,9 +52,12 @@ export default function MarketIntelligenceCard({
             </p>
           </div>
 
-          <p className="text-[13px] font-normal font-inter text-[#C2C6D6] mt-[20px]">
-            {timeToRead}
-          </p>
+          <div className="flex items-center mt-[20px] gap-[4px]">
+            <Clock size={13} className="text-[#C2C6D6]" />
+            <p className="text-[13px] font-normal font-inter text-[#C2C6D6] leading-none">
+              {timeToRead}
+            </p>
+          </div>
         </div>
       </NavLink>
     </div>

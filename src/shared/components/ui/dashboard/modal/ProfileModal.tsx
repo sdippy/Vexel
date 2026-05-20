@@ -1,4 +1,4 @@
-import Modal from "@/shared/components/ui/modal/modal";
+import Modal from "@/shared/components/ui/dashboard/modal/modal";
 
 import { useModalStore } from "@/shared/types";
 
