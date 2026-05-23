@@ -1,7 +1,13 @@
-import { formatDistanceToNowStrict } from "date-fns";
+import { formatDistanceToNowStrict, isValid } from "date-fns";
 
 export function formatShortTimeAgo(date: string) {
-  const result = formatDistanceToNowStrict(new Date(date));
+  const parsedDate = new Date(date);
+
+  if (!isValid(parsedDate)) {
+    return "Invalid date";
+  }
+
+  const result = formatDistanceToNowStrict(parsedDate);
 
   return result
     .replace(" minutes", "m ago")
@@ -10,6 +16,25 @@ export function formatShortTimeAgo(date: string) {
     .replace(" hour", "h ago")
     .replace(" days", "d ago")
     .replace(" day", "d ago")
-    .replace(" year", "y ago")
-    .replace(" years", "y agos");
+    .replace(" years", "y ago")
+    .replace(" year", "y ago");
+}
+
+export function formatMiddleTimeAgo(date: string) {
+  const parsedDate = new Date(date);
+
+  if (!isValid(parsedDate)) {
+    return "Invalid date";
+  }
+
+  const result = formatDistanceToNowStrict(parsedDate);
+
+  return result
+    .replace(" minutes", " min ago")
+    .replace(" minute", " mins ago")
+    .replace(" hours", " hour ago")
+    .replace(" hour", " hours ago")
+    .replace(" day", " days ago")
+    .replace(" years", " year ago")
+    .replace(" year", " years ago");
 }

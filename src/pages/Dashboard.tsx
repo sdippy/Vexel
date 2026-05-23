@@ -2,25 +2,25 @@ import TopRowDashboard from "../shared/components/ui/dashboard/top-row-dashboard
 import SecondRowDashboard from "../shared/components/ui/dashboard/section/SecondRowDashboard";
 import TopMovers from "../shared/components/ui/dashboard/section/TopMovers";
 
-import DashboardSkeleton from "../shared/components/ui/skeleton/dashboard-skeleton/DashboardSkeleton";
+// import DashboardSkeleton from "../shared/components/ui/skeleton/dashboard-skeleton/DashboardSkeleton";
 
-import { useMarketIntelligence } from "../shared/hooks/useMarketIntelligence";
+// import { useMarketNews } from "../shared/hooks/useMarketNews";
 // import другие query
 
 export default function Dashboard() {
-  const market = useMarketIntelligence(2);
+  // const market = useMarketNews(2);
 
-  // потом добавишь:
+  // потом:
   // const portfolio = usePortfolio();
   // const movers = useTopMovers();
 
-  const isLoading = market.isLoading;
+  // const isLoading = market.isLoading;
   // || portfolio.isLoading
   // || movers.isLoading
 
-  if (!isLoading) {
-    return <DashboardSkeleton />;
-  }
+  // if (isLoading) {
+  //   return <DashboardSkeleton />;
+  // }
 
   return (
     <div className="flex flex-col gap-[24px]">

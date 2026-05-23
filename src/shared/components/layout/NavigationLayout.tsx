@@ -1,9 +1,17 @@
-import { Outlet } from "react-router-dom";
-import { AnimatePresence, motion } from "framer-motion";
+import { Outlet, useLocation } from "react-router-dom";
+import { useEffect } from "react";
 import Aside from "../ui/dashboard/section/Aside";
 import Header from "../ui/dashboard/section/Header";
 
 export function NavigationLayout() {
+  const location = useLocation();
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "auto",
+    });
+  }, [location.pathname]);
   return (
     <div className="min-h-screen bg-[#10131A]">
       {/* Градиент — отдельный слой, не перерисовывается при скролле */}
@@ -38,18 +46,9 @@ export function NavigationLayout() {
       </header>
 
       <div className="relative z-10 ml-[280px] pt-[64px]">
-        <AnimatePresence mode="wait">
-          <motion.main
-            key={location.pathname}
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.05, ease: "easeOut" }}
-            className="p-10"
-          >
-            <Outlet />
-          </motion.main>
-        </AnimatePresence>
+        <main className="p-10">
+          <Outlet />
+        </main>
       </div>
     </div>
   );

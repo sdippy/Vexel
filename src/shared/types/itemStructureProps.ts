@@ -13,12 +13,24 @@ export type MarketMoversItem = {
 };
 
 export type MarketIntelligence = {
-  id: number;
+  id: string;
   label: string;
   timeToRead: string;
   typeTopic: string;
-  timeCreated: string;
+  createdAt: string;
   imgTopic: string;
+};
+
+export type MarketNews = {
+  id: string;
+  topic: string;
+  label: string;
+  description: string;
+  timeToRead: string;
+  typeTopic: string;
+  imageUrl: string;
+  keywords: string[];
+  createdAt: string;
 };
 
 export type NotificationItem = {

@@ -1,8 +1,8 @@
 import MarketIntelligenceCard from "./MarketIntelligenceCard";
-import { useMarketIntelligence } from "@/shared/hooks/useMarketIntelligence";
+import { useMarketNews } from "@/shared/hooks/useMarketNews";
 
 export default function MarketIntelligence() {
-  const { data = [] } = useMarketIntelligence(2);
+  const { data = [] } = useMarketNews(2);
 
   return (
     <div className="w-4/6 flex flex-col gap-[17px]">
@@ -16,7 +16,7 @@ export default function MarketIntelligence() {
             label={item.label}
             timeToRead={item.timeToRead}
             typeTopic={item.typeTopic}
-            timeCreated={item.timeCreated}
+            createdAt={item.createdAt}
             imgTopic={item.imageUrl}
           />
         ))}

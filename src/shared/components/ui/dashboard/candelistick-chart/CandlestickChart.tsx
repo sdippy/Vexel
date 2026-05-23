@@ -220,23 +220,23 @@ export default function CandlestickChart() {
               <div className="flex gap-[20px]">
                 <ButtonSelectCoin />
                 <div className="flex items-center p-[4px] rounded-[8px] border border-white/10 bg-white/[0.05] backdrop-blur-[12px]">
-                  <button className="text-[14px] font-medium font-hanken px-[12px] py-[4px] rounded-[8px] text-[#E1E2EC] hover:text-[#00285D] hover:bg-[#ADC6FF] hover:shadow-[0_0_20px_rgba(173,198,255,0.3)] transition-all duration-200">
+                  <button className="text-[14px] font-medium font-inter px-[12px] py-[4px] rounded-[8px] text-[#E1E2EC] hover:text-[#00285D] hover:bg-[#ADC6FF] hover:shadow-[0_0_20px_rgba(173,198,255,0.3)] transition-all duration-200">
                     1H
                   </button>
 
-                  <button className="text-[14px] font-medium font-hanken px-[12px] py-[4px] rounded-[8px] text-[#E1E2EC] hover:text-[#00285D] hover:bg-[#ADC6FF] hover:shadow-[0_0_20px_rgba(173,198,255,0.3)] transition-all duration-200">
+                  <button className="text-[14px] font-medium font-inter px-[12px] py-[4px] rounded-[8px] text-[#E1E2EC] hover:text-[#00285D] hover:bg-[#ADC6FF] hover:shadow-[0_0_20px_rgba(173,198,255,0.3)] transition-all duration-200">
                     24H
                   </button>
 
-                  <button className="text-[14px] font-medium font-hanken px-[12px] py-[4px] rounded-[8px] text-[#E1E2EC] hover:text-[#00285D] hover:bg-[#ADC6FF] hover:shadow-[0_0_20px_rgba(173,198,255,0.3)] transition-all duration-200">
+                  <button className="text-[14px] font-medium font-inter px-[12px] py-[4px] rounded-[8px] text-[#E1E2EC] hover:text-[#00285D] hover:bg-[#ADC6FF] hover:shadow-[0_0_20px_rgba(173,198,255,0.3)] transition-all duration-200">
                     7D
                   </button>
 
-                  <button className="text-[14px] font-medium font-hanken px-[12px] py-[4px] rounded-[8px] text-[#E1E2EC] hover:text-[#00285D] hover:bg-[#ADC6FF] hover:shadow-[0_0_20px_rgba(173,198,255,0.3)] transition-all duration-200">
+                  <button className="text-[14px] font-medium font-inter px-[12px] py-[4px] rounded-[8px] text-[#E1E2EC] hover:text-[#00285D] hover:bg-[#ADC6FF] hover:shadow-[0_0_20px_rgba(173,198,255,0.3)] transition-all duration-200">
                     1M
                   </button>
 
-                  <button className="text-[14px] font-medium font-hanken px-[12px] py-[4px] rounded-[8px] text-[#E1E2EC] hover:text-[#00285D] hover:bg-[#ADC6FF] hover:shadow-[0_0_20px_rgba(173,198,255,0.3)] transition-all duration-200">
+                  <button className="text-[14px] font-medium font-inter px-[12px] py-[4px] rounded-[8px] text-[#E1E2EC] hover:text-[#00285D] hover:bg-[#ADC6FF] hover:shadow-[0_0_20px_rgba(173,198,255,0.3)] transition-all duration-200">
                     1Y
                   </button>
                 </div>
