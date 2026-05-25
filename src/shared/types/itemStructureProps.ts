@@ -18,7 +18,7 @@ export type MarketIntelligence = {
   timeToRead: string;
   typeTopic: string;
   createdAt: string;
-  imgTopic: string;
+  imageUrl: string;
 };
 
 export type MarketNews = {
@@ -31,6 +31,11 @@ export type MarketNews = {
   imageUrl: string;
   keywords: string[];
   createdAt: string;
+};
+
+export type MarketNewsTopic = {
+  topic: string;
+  count: number;
 };
 
 export type NotificationItem = {

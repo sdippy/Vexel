@@ -11,6 +11,7 @@ export * from "../utils/Crypto/crypto.selectors";
 export * from "../utils/news/news.types";
 export * from "../utils/news/news.registry";
 export * from "../utils/news/news.selectors";
+export * from "../utils/news/newsFindTopTopic";
 // NotificationUtils
 export * from "../utils/notification/notification.types";
 export * from "../utils/notification/notification.registry";

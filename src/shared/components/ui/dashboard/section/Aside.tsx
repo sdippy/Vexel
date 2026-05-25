@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom";
+
 import Dashboard from "@/shared/assets/icons_aside/Dashboard_icon.svg?react";
 import Markets from "@/shared/assets/icons_aside/Markets_icon.svg?react";
 import Portfolio from "@/shared/assets/icons_aside/Portfolio_icon.svg?react";

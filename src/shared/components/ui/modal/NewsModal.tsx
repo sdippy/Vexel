@@ -1,13 +1,14 @@
-import Modal from "@/shared/components/ui/modal/modal";
-
 import { useModalStore } from "@/shared/types";
 
+import Modal from "@/shared/components/ui/modal/modal";
+
 export default function ProfileModal() {
-  const { isModalOpen, closeProfile } = useModalStore();
+  const { isModalOpen, closeNews } = useModalStore();
+  const selectedNews = useModalStore((s) => s.selectedNews);
 
   return (
-    <Modal isOpen={isModalOpen} onClose={closeProfile}>
-      <div className="flex flex-col">
+    <Modal isOpen={isModalOpen} onClose={closeNews}>
+      <div className="flex flex-col  w-[420px] p-6">
         {/* top */}
         <div className="flex items-center gap-4">
           <div
@@ -29,14 +30,7 @@ export default function ProfileModal() {
               Aleksandr
             </h2>
 
-            <p
-              className="
-                text-sm
-                text-white/50
-              "
-            >
-              Frontend Developer
-            </p>
+            <p>{selectedNews?.description}</p>
           </div>
         </div>
 

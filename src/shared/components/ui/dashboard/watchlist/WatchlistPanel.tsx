@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom";
+
 import WatchlistPanelList from "./WatchlistPanelList";
 import PlusIcon from "@/shared/assets/icon_utils/Plus_icon.svg?react";
 

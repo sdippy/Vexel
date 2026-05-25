@@ -1,11 +1,12 @@
-import { NavLink } from "react-router-dom";
 import { useRef, useState } from "react";
+import { NavLink } from "react-router-dom";
 import { motion } from "framer-motion";
+import { usePopoverMenuStore } from "@/shared/types";
+
 import Find from "@/shared/assets/icons_header/Find_icon.svg?react";
 import Notification from "@/shared/assets/icons_header/Notification_icon.svg?react";
 import ProfilePopover from "../popover/ProfilePopover";
 import NotificationPopover from "../popover/NotificationPopover";
-import { usePopoverMenuStore } from "@/shared/types";
 
 export default function Header() {
   const [isSearchOpen, setIsSearchOpen] = useState(false);

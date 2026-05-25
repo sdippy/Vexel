@@ -1,36 +1,31 @@
-import type { WatchlistItem } from "@/shared/types";
+import { memo } from "react";
+
 import { NavLink } from "react-router-dom";
 import SparklineChart from "./SparklineChart";
 import {
-  getCrypto,
+  type WatchlistItem,
   getCurrentPrice,
   getPreviousPrice,
   getPriceChange,
   getPriceColor,
-  getCryptoTheme,
   getCurrentPriceFormat,
 } from "@/shared/types";
 
-type WatchlistPanelCardProps = Omit<WatchlistItem, "id">;
+import { getCryptoTheme, getCryptoSymbol } from "@/shared/utils/Crypto/crypto";
 
-export default function WatchlistPanelCard({
-  nameCoin,
-  priceData,
-}: WatchlistPanelCardProps) {
-  const Icon = getCrypto(nameCoin).icon;
-  const pricePercent = getPriceChange(
-    getCurrentPrice(priceData),
-    getPreviousPrice(priceData),
-  );
+import { CryptoIcon } from "@/shared/utils/Crypto/CryptoIcon";
 
-  const priceColor = getPriceColor(
-    getCurrentPrice(priceData),
-    getPreviousPrice(priceData),
-  );
+type WatchlistPanelCardProps = WatchlistItem;
 
-  const price = getCurrentPriceFormat(priceData);
+function WatchlistPanelCard(props: WatchlistPanelCardProps) {
+  const currentPrice = getCurrentPrice(props.priceData);
+  const previousPrice = getPreviousPrice(props.priceData);
 
-  const theme = getCryptoTheme(nameCoin);
+  const pricePercent = getPriceChange(currentPrice, previousPrice);
+  const priceColor = getPriceColor(currentPrice, previousPrice);
+  const price = getCurrentPriceFormat(props.priceData);
+
+  const theme = getCryptoTheme(props.nameCoin);
   return (
     <NavLink
       to="/Markets"
@@ -51,10 +46,13 @@ export default function WatchlistPanelCard({
               <div
                 className={`flex items-center justify-center rounded-full h-[24px] w-[24px] ${theme.bgColor} ${theme.borderColor} border-[1px]`}
               >
-                <Icon size={20} variant="branded" />
+                <CryptoIcon
+                  symbol={getCryptoSymbol(props.nameCoin)}
+                  className="size-10"
+                />
               </div>
               <p className="text-[14px] font-normal font-hanken text-[#E1E2EC] uppercase">
-                {nameCoin}
+                {props.nameCoin}
               </p>
             </div>
             <p
@@ -69,10 +67,12 @@ export default function WatchlistPanelCard({
             >
               ${price}
             </p>
-            <SparklineChart chartData={priceData} />
+            <SparklineChart chartData={props.priceData} />
           </div>
         </div>
       </div>
     </NavLink>
   );
 }
+
+export default memo(WatchlistPanelCard);

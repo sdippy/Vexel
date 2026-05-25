@@ -35,13 +35,7 @@ export default function MarketMoversList() {
   return (
     <div className="w-full h-full grid grid-cols-2 gap-[17px]">
       {data.map((item) => (
-        <MarketMoversCard
-          key={item.id}
-          label={item.label}
-          nameCoin={item.nameCoin}
-          priceChange={item.priceChange}
-          color={item.color}
-        />
+        <MarketMoversCard key={item.id} {...item} />
       ))}
     </div>
   );

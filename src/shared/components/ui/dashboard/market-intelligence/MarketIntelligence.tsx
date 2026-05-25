@@ -11,14 +11,7 @@ export default function MarketIntelligence() {
       </h2>
       <div className="w-full h-full flex gap-[17px]">
         {data.map((item: any) => (
-          <MarketIntelligenceCard
-            key={item.id}
-            label={item.label}
-            timeToRead={item.timeToRead}
-            typeTopic={item.typeTopic}
-            createdAt={item.createdAt}
-            imgTopic={item.imageUrl}
-          />
+          <MarketIntelligenceCard key={item.id} {...item} />
         ))}
       </div>
     </div>

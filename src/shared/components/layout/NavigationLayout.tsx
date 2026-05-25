@@ -1,7 +1,11 @@
 import { Outlet, useLocation } from "react-router-dom";
-import { useEffect } from "react";
-import Aside from "../ui/dashboard/section/Aside";
-import Header from "../ui/dashboard/section/Header";
+import { useEffect, lazy } from "react";
+
+import Aside from "@/shared/components/ui/dashboard/section/Aside";
+const Header = lazy(
+  () => import("@/shared/components/ui/dashboard/section/Header"),
+);
+import NewsModal from "@/shared/components/ui/modal/NewsModal";
 
 export function NavigationLayout() {
   const location = useLocation();
@@ -50,6 +54,7 @@ export function NavigationLayout() {
           <Outlet />
         </main>
       </div>
+      <NewsModal />
     </div>
   );
 }

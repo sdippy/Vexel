@@ -1,5 +1,4 @@
-import { useEffect } from "react";
-import type { ReactNode } from "react";
+import { useEffect, type ReactNode } from "react";
 
 import { createPortal } from "react-dom";
 
@@ -37,34 +36,15 @@ export default function Modal({ isOpen, onClose, children }: ModalProps) {
   if (!isOpen) return null;
 
   return createPortal(
-    <div
-      className="
-        fixed inset-0 z-50
-        flex items-center justify-center
-      "
-    >
+    <div className="fixed inset-0 z-50 flex items-center justify-center">
       {/* overlay */}
       <div
         onClick={onClose}
-        className="
-          absolute inset-0
-          bg-black/60
-          backdrop-blur-sm
-        "
+        className="absolute inset-0 bg-black/60 backdrop-blur-sm"
       />
 
       {/* content */}
-      <div
-        className="
-          relative z-10
-          w-[420px]
-          rounded-3xl
-          border border-white/10
-          bg-[#11131A]
-          p-6
-          shadow-2xl
-        "
-      >
+      <div className="relative z-10 rounded-3xl border border-white/10 bg-[#11131A] shadow-2xl">
         {children}
       </div>
     </div>,

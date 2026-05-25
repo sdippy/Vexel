@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom";
+
 import PortfolioChart from "./PortfolioChart";
 import Portfolio from "@/shared/assets/icons_aside/Portfolio_icon.svg?react";
 

@@ -1,4 +1,4 @@
-import MarketOverviewSection from "../shared/components/ui/markets/section/MarketOverviewSection";
+import MarketOverviewSection from "@/shared/components/ui/markets/section/MarketOverviewSection";
 import AssetTableControls from "@/shared/components/ui/markets/section/AssetTableControls";
 import AssetTableSection from "@/shared/components/ui/markets/section/AssetTableSection";
 import LatencyAPI from "@/shared/components/ui/markets/section/LatensyAPI";

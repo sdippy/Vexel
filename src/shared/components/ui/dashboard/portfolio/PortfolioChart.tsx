@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, memo } from "react";
 import { cryptoRegistry } from "@/shared/utils/Crypto/crypto.registry";
 
 type Asset = {
@@ -34,7 +34,7 @@ const assets: Asset[] = [
   { nameCoin: "DOGE", percent: 5 },
 ];
 
-export default function PortfolioDonutChart() {
+function PortfolioDonutChart() {
   const [animated, setAnimated] = useState(false);
 
   useEffect(() => {
@@ -145,3 +145,5 @@ export default function PortfolioDonutChart() {
     </div>
   );
 }
+
+export default memo(PortfolioDonutChart);

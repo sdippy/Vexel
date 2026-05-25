@@ -1,22 +1,27 @@
 import { create } from "zustand";
+import type { MarketNews } from "@/shared/types";
 
 interface ModalStore {
   isModalOpen: boolean;
+  selectedNews: MarketNews | null;
 
-  openProfile: () => void;
-  closeProfile: () => void;
+  openNews: (news: MarketNews) => void;
+  closeNews: () => void;
 }
 
 export const useModalStore = create<ModalStore>((set) => ({
   isModalOpen: false,
+  selectedNews: null,
 
-  openProfile: () =>
+  openNews: (news) =>
     set({
       isModalOpen: true,
+      selectedNews: news,
     }),
 
-  closeProfile: () =>
+  closeNews: () =>
     set({
       isModalOpen: false,
+      selectedNews: null,
     }),
 }));

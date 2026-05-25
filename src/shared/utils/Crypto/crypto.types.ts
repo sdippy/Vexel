@@ -24,8 +24,6 @@ export type CryptoName =
 
 export type CryptoAlias = string;
 
-export type CryptoIcon = ComponentType<any>;
-
 export type CryptoTheme = {
   color: string;
   bgColor: string;
@@ -34,7 +32,6 @@ export type CryptoTheme = {
 
 export type CryptoRegistryItem = {
   symbol: CryptoName;
-  icon: CryptoIcon;
   theme: CryptoTheme;
   aliases: readonly CryptoAlias[];
 };
@@ -44,3 +41,5 @@ export type CryptoRegistry = Record<CryptoName, CryptoRegistryItem>;
 export type CryptoResolved = CryptoRegistryItem;
 
 export type CryptoInput = CryptoName | (string & {});
+
+export type CryptoIconComponent = ComponentType<any>;

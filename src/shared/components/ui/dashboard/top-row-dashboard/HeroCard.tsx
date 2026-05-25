@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom";
+
 import VectorBg from "@/shared/assets/icon_utils/Vector.svg?react";
 
 export default function HeroCard() {

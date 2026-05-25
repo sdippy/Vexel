@@ -4,6 +4,7 @@ import { NavLink } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { usePopoverMenuStore } from "@/shared/types";
 import { Zap } from "lucide-react";
+
 import NotificationCard from "./NotificationCard";
 
 const data = [
@@ -128,14 +129,7 @@ export default function NotificationPopover({
           {/* Notification */}
           <div className="flex flex-col border-t-[1px] border-white/10 max-h-[400px] overflow-auto">
             {data.map((item) => (
-              <NotificationCard
-                key={item.id}
-                type={item.type}
-                title={item.title}
-                description={item.description}
-                volatility={item.volatility}
-                date={item.date}
-              />
+              <NotificationCard key={item.id} {...item} />
             ))}
           </div>
           {/* FOOTER */}

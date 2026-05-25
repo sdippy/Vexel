@@ -1,20 +1,13 @@
-import type { MarketNews } from "@/shared/types";
+import { memo } from "react";
 import {
+  type MarketNews,
   getNewsMarketSentimentTheme,
   formatMiddleTimeAgo,
 } from "@/shared/types";
 
-type MarketNewsCardProps = Omit<MarketNews, "id">;
-
-export default function NewsCardBig({
-  topic,
-  label,
-  description,
-  typeTopic,
-  imageUrl,
-  createdAt,
-}: MarketNewsCardProps) {
-  const theme = getNewsMarketSentimentTheme(typeTopic);
+type MarketNewsCardProps = MarketNews;
+function NewsCardBig(props: MarketNewsCardProps) {
+  const theme = getNewsMarketSentimentTheme(props.typeTopic);
 
   return (
     <div className="w-full flex h-[500px] border-[1px] border-white/10 rounded-[12px] bg-white/[.03] shadow-[0_8_32px_rgba(0,0,0,0.37)]">
@@ -23,11 +16,11 @@ export default function NewsCardBig({
           <p
             className={`text-[12px] font-normal font-inter rounded-full px-[8px] border-[1px] uppercase ${theme.bgColor} ${theme.borderColor} ${theme.color}`}
           >
-            {typeTopic}
+            {props.typeTopic}
           </p>
         </div>
         <img
-          src={imageUrl}
+          src={props.imageUrl}
           alt="IMG NEWS"
           className="w-full h-full rounded-l-[12px] object-cover"
         />
@@ -36,19 +29,19 @@ export default function NewsCardBig({
         <div className="flex flex-col gap-[16px]">
           <div className="flex items-center gap-[12px]">
             <span className="text-[16px] font-jetbrainsmono text-[#ADC6FF]">
-              {topic}
+              {props.topic}
             </span>
             <span className="rounded-full h-[4px] w-[4px] bg-[#C2C6D6]"></span>
             <span className="text-[16px] font-jetbrainsmono text-[#C2C6D6]">
-              {formatMiddleTimeAgo(createdAt)}
+              {formatMiddleTimeAgo(props.createdAt)}
             </span>
           </div>
           <div className="flex flex-col overflow-y-auto h-[340px]">
             <h2 className="text-[24px] font-semibold font-hanken text-[#E1E2EC]">
-              {label}
+              {props.label}
             </h2>
             <p className="text-[16px] font-inter text-[#E1E2EC]">
-              {description}
+              {props.description}
             </p>
           </div>
         </div>
@@ -56,3 +49,5 @@ export default function NewsCardBig({
     </div>
   );
 }
+
+export default memo(NewsCardBig);

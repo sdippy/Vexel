@@ -1,13 +1,14 @@
+import { useEffect, useRef, useState, memo } from "react";
 import {
   CandlestickSeries,
   type CandlestickData,
   ColorType,
   createChart,
 } from "lightweight-charts";
-import { useEffect, useRef, useState } from "react";
+
 import ButtonSelectCoin from "./buttonSelectCoin";
 
-export default function CandlestickChart() {
+function CandlestickChart() {
   const chartContainerRef = useRef<HTMLDivElement>(null);
   const [animated, setAnimated] = useState(false);
 
@@ -276,3 +277,5 @@ export default function CandlestickChart() {
     </div>
   );
 }
+
+export default memo(CandlestickChart);
