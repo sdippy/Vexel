@@ -29,6 +29,7 @@ export default function PortfolioCard() {
           </div>
           <NavLink
             to="/Portfolio"
+            aria-label="Open portfolio"
             className={({ isActive }) =>
               `${
                 isActive

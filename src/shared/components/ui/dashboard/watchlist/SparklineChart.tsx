@@ -23,18 +23,16 @@ function SparklineChart({ chartData, width = 64, height = 20 }: Props) {
 
     let min = Infinity;
     let max = -Infinity;
-
     for (const v of chartData) {
       if (v < min) min = v;
       if (v > max) max = v;
     }
 
     const range = max - min || 1;
-    const stepX = chartData.length > 1 ? width / (chartData.length - 1) : 0;
+    const stepX = width / (chartData.length - 1);
 
     let upwardMoves = 0;
     let downwardMoves = 0;
-
     for (let i = 1; i < chartData.length; i++) {
       const diff = chartData[i] - chartData[i - 1];
       if (Math.abs(diff) < 0.0001) continue;
@@ -54,7 +52,7 @@ function SparklineChart({ chartData, width = 64, height = 20 }: Props) {
 
   useEffect(() => {
     const canvas = canvasRef.current;
-    if (!canvas) return;
+    if (!canvas || !processed) return; // ранний выход если нет данных
 
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
@@ -62,68 +60,45 @@ function SparklineChart({ chartData, width = 64, height = 20 }: Props) {
     stopAnimation();
     startRef.current = null;
 
-    const dpr = window.devicePixelRatio || 1;
+    const dpr = window.devicePixelRatio || 1; // читаем один раз
 
     canvas.width = width * dpr;
     canvas.height = height * dpr;
-
     canvas.style.width = `${width}px`;
     canvas.style.height = `${height}px`;
-
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-    if (!processed) return;
-
     const { points, color, isPositive } = processed;
+    const last = points[points.length - 1];
 
     const draw = (t: number) => {
       if (!startRef.current) startRef.current = t;
-
       const progress = Math.min((t - startRef.current) / 600, 1);
 
       ctx.clearRect(0, 0, width, height);
-
       ctx.save();
 
-      // AREA
+      // --- Area fill (мгновенно, без анимации — даёт контекст пока линия рисуется) ---
       const gradient = ctx.createLinearGradient(0, 0, 0, height);
       gradient.addColorStop(
         0,
-        isPositive ? "rgba(74,225,118,0.35)" : "rgba(255,180,171,0.35)",
+        isPositive ? "rgba(74,225,118,0.25)" : "rgba(255,180,171,0.25)",
       );
       gradient.addColorStop(1, "rgba(0,0,0,0)");
 
       ctx.fillStyle = gradient;
-
       ctx.beginPath();
       ctx.moveTo(points[0].x, height);
-
-      for (const p of points) {
-        ctx.lineTo(p.x, p.y);
-      }
-
-      ctx.lineTo(points[points.length - 1].x, height);
+      for (const p of points) ctx.lineTo(p.x, p.y);
+      ctx.lineTo(last.x, height);
       ctx.closePath();
       ctx.fill();
 
-      // glow line
-      ctx.globalAlpha = 0.12;
-      ctx.strokeStyle = color;
-      ctx.lineWidth = 2;
-
-      ctx.beginPath();
-      for (let i = 0; i < points.length; i++) {
-        const p = points[i];
-        i === 0 ? ctx.moveTo(p.x, p.y) : ctx.lineTo(p.x, p.y);
-      }
-      ctx.stroke();
-
-      // main animated line
-      ctx.globalAlpha = 1;
+      // --- Анимированная линия (ИСПРАВЛЕНО) ---
       ctx.strokeStyle = color;
       ctx.lineWidth = 1.5;
       ctx.lineCap = "round";
-
+      ctx.lineJoin = "round";
       ctx.beginPath();
 
       const drawUntil = progress * (points.length - 1);
@@ -133,17 +108,23 @@ function SparklineChart({ chartData, width = 64, height = 20 }: Props) {
 
         const p1 = points[i];
         const p2 = points[i + 1];
-
         const segment = Math.min(1, drawUntil - i);
 
-        const x = p1.x + (p2.x - p1.x) * segment;
-        const y = p1.y + (p2.y - p1.y) * segment;
+        // FIX: для каждого сегмента явно стартуем с p1
+        if (i === 0) {
+          ctx.moveTo(p1.x, p1.y);
+        } else {
+          ctx.lineTo(p1.x, p1.y); // соединяем с предыдущей точкой
+        }
 
-        i === 0 ? ctx.moveTo(p1.x, p1.y) : ctx.lineTo(x, y);
+        // Интерполируем конец текущего сегмента
+        ctx.lineTo(
+          p1.x + (p2.x - p1.x) * segment,
+          p1.y + (p2.y - p1.y) * segment,
+        );
       }
 
       ctx.stroke();
-
       ctx.restore();
 
       if (progress < 1) {
@@ -152,20 +133,10 @@ function SparklineChart({ chartData, width = 64, height = 20 }: Props) {
     };
 
     frameRef.current = requestAnimationFrame(draw);
-
     return () => stopAnimation();
   }, [processed, width, height]);
 
-  return (
-    <canvas
-      ref={canvasRef}
-      style={{
-        width,
-        height,
-        display: "block",
-      }}
-    />
-  );
+  return <canvas ref={canvasRef} style={{ width, height, display: "block" }} />;
 }
 
 export default memo(SparklineChart);

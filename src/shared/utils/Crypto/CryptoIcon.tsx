@@ -1,21 +1,32 @@
-import { memo } from "react";
-
-import { cryptoIcons } from "./crypto.icons";
+import { memo, lazy, Suspense } from "react";
 import { FallbackTokenIcon } from "./fallback-icons";
+
+type TVariant = "mono" | "branded" | "background";
 
 type Props = {
   symbol: string;
+  variant?: TVariant;
+  size?: number | string;
+  color?: string;
   className?: string;
 };
 
-export const CryptoIcon = memo(({ symbol, className }: Props) => {
-  const Icon = cryptoIcons[symbol];
+const LazyRenderer = lazy(() => import("./CryptoIconRenderer"));
 
-  if (!Icon) {
-    return <FallbackTokenIcon symbol={symbol} className={className} />;
-  }
-
-  return <Icon variant="branded" className={className} />;
-});
+export const CryptoIcon = memo(
+  ({ symbol, variant = "branded", size, color, className }: Props) => (
+    <Suspense
+      fallback={<FallbackTokenIcon symbol={symbol} className={className} />}
+    >
+      <LazyRenderer
+        symbol={symbol}
+        variant={variant}
+        size={size}
+        color={color}
+        className={className}
+      />
+    </Suspense>
+  ),
+);
 
 CryptoIcon.displayName = "CryptoIcon";

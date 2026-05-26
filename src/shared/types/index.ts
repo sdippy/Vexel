@@ -6,7 +6,6 @@ export { getSparklinePoints } from "../utils/market/getSparklinePoints";
 // CryptoUtils
 export * from "../utils/Crypto/crypto.types";
 export * from "../utils/Crypto/crypto.registry";
-export * from "../utils/Crypto/crypto.selectors";
 // NewsUtils
 export * from "../utils/news/news.types";
 export * from "../utils/news/news.registry";

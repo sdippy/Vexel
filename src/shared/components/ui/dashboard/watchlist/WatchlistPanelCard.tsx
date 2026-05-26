@@ -28,7 +28,8 @@ function WatchlistPanelCard(props: WatchlistPanelCardProps) {
   const theme = getCryptoTheme(props.nameCoin);
   return (
     <NavLink
-      to="/Markets"
+      aria-label="Open watchlist"
+      to="/Watchlist"
       className="w-full h-[82px] border-[1px] border-white/10 rounded-[12px] flex flex-col  w-full bg-white/[.03] shadow-[0_8_32px_rgba(0,0,0,0.37)] hover:-translate-y-[2px] hover:shadow-[0_0_20px_rgba(173,198,255,0.3)] transition-all duration-200"
     >
       <div

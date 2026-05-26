@@ -19,11 +19,13 @@ export default defineConfig({
       brotliSize: true,
     }),
   ],
+
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
     },
   },
+
   build: {
     rollupOptions: {
       output: {
@@ -39,6 +41,36 @@ export default defineConfig({
             return "vendor";
           }
         },
+      },
+    },
+  },
+
+  server: {
+    proxy: {
+      "/api": {
+        target: "http://localhost:3001",
+        changeOrigin: true,
+        secure: false,
+      },
+
+      "/ws": {
+        target: "ws://localhost:3001",
+        ws: true,
+      },
+    },
+  },
+
+  preview: {
+    proxy: {
+      "/api": {
+        target: "http://localhost:3001",
+        changeOrigin: true,
+        secure: false,
+      },
+
+      "/ws": {
+        target: "ws://localhost:3001",
+        ws: true,
       },
     },
   },

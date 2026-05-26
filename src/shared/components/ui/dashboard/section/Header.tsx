@@ -84,6 +84,7 @@ export default function Header() {
         </NavLink>
         <div className="flex gap-[15px]">
           <button
+            aria-label="Open notification"
             ref={buttonRefNotification}
             onClick={() => togglePopover("notification")}
             className="relative cursor-pointer w-[16px] h-[20px] hover:-translate-y-[2px] transition-all duration-200"
@@ -96,6 +97,7 @@ export default function Header() {
           </button>
         </div>
         <button
+          aria-label="Open profile"
           ref={buttonRefProfile}
           onClick={() => togglePopover("profile")}
           className="flex items-center justify-center cursor-pointer w-[36px] h-[36px] rounded-full border-[1px] border-white/20 hover:border-[#ADC6FF] hover:shadow-[0_0_20px_rgba(173,198,255,0.3)] transition-all duration-200 cursor-pointer"
