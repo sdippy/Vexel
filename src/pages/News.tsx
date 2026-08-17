@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Info,
@@ -8,17 +8,28 @@ import {
 } from "lucide-react";
 
 import { getTopTopics, type MarketNews } from "@/shared/types";
-
 import { useMarketNews } from "@/shared/hooks/useMarketNews";
+
 import NewsCardBig from "@/shared/components/ui/news/NewsCardBig";
 import NewsCardMini from "@/shared/components/ui/news/NewsCardMini";
 import NewsTopic from "@/shared/components/ui/news/NewsTopic";
+import NewsSkeleton from "@/shared/components/ui/skeleton/news-skeleton/NewsSkeleton";
 
 export default function News() {
+  const { data = [], refetch, isFetching, isLoading } = useMarketNews(10);
+
   const [order, setOrder] = useState<"asc" | "desc">("desc");
 
-  const { data = [], refetch, isFetching } = useMarketNews(10, order);
-  const latestNews = data[0];
+  const sortedData = useMemo(() => {
+    return [...data].sort((a, b) => {
+      const t1 = new Date(a.createdAt).getTime();
+      const t2 = new Date(b.createdAt).getTime();
+
+      return order === "desc" ? t2 - t1 : t1 - t2;
+    });
+  }, [data, order]);
+
+  const latestNews = sortedData[0];
 
   const bullishCount = data.filter(
     (item: MarketNews) => item.typeTopic === "BULLISH",
@@ -35,6 +46,8 @@ export default function News() {
   const bearishPercent = total > 0 ? (bearishCount / total) * 100 : 0;
 
   const topTopics = getTopTopics(data, 3);
+
+  if (isLoading) return <NewsSkeleton />;
 
   return (
     <div className="flex flex-col gap-[32px]">
@@ -187,7 +200,7 @@ export default function News() {
             },
           }}
         >
-          {data.slice(1).map((item: any) => (
+          {sortedData.slice(1).map((item: any) => (
             <motion.div
               key={item.id}
               variants={{

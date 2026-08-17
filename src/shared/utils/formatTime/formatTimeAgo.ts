@@ -35,6 +35,8 @@ export function formatMiddleTimeAgo(date: string) {
     .replace(" hours", " hour ago")
     .replace(" hour", " hours ago")
     .replace(" day", " days ago")
+    .replace(" month", " month ago")
+    .replace(" months", " months ago")
     .replace(" years", " year ago")
     .replace(" year", " years ago");
 }

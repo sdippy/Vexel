@@ -68,7 +68,7 @@ function WatchlistPanelCard(props: WatchlistPanelCardProps) {
             >
               ${price}
             </p>
-            <SparklineChart chartData={props.priceData} />
+            <SparklineChart chartData={props.priceData} width={64} />
           </div>
         </div>
       </div>

@@ -26,6 +26,9 @@ export type MarketNews = {
   topic: string;
   label: string;
   description: string;
+  comment: string;
+  source: string;
+  author: string;
   timeToRead: string;
   typeTopic: string;
   imageUrl: string;

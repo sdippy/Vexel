@@ -1,3 +1,9 @@
+import { getCryptoTheme, getCryptoSymbol } from "@/shared/utils/Crypto/crypto";
+
+import { CryptoIcon } from "@/shared/utils/Crypto/CryptoIcon";
+
+const theme = getCryptoTheme("Bitcoin");
+
 export default function AssetTableSection() {
   return (
     <div className="flex w-full flex-col gap-[24px]">
@@ -40,7 +46,14 @@ export default function AssetTableSection() {
 
                   <td className="border-b border-white/10 px-[24px]">
                     <div className="flex items-center gap-[12px]">
-                      <div className="h-[32px] w-[32px] rounded-full border border-[#F7931A]/30 bg-[#F7931A]/20" />
+                      <div
+                        className={`flex items-center justify-center rounded-full h-[32px] w-[32px] ${theme.bgColor} ${theme.borderColor} border-[1px]`}
+                      >
+                        <CryptoIcon
+                          symbol={getCryptoSymbol("Bitcoin")}
+                          className="size-6"
+                        />
+                      </div>
                       <div className="flex flex-col">
                         <span className="text-[14px] font-bold text-[#E1E2EC] font-inter">
                           Bitcoin

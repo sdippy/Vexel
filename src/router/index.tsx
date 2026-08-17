@@ -27,7 +27,7 @@ export const router = createBrowserRouter([
       {
         path: "Markets",
         element: (
-          <Suspense fallback={<div>Loading...</div>}>
+          <Suspense fallback={<div></div>}>
             <Markets />
           </Suspense>
         ),
@@ -35,7 +35,7 @@ export const router = createBrowserRouter([
       {
         path: "News",
         element: (
-          <Suspense fallback={<div>Loading...</div>}>
+          <Suspense fallback={<div></div>}>
             <News />
           </Suspense>
         ),

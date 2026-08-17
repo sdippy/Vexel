@@ -15,7 +15,7 @@ function NewsCardMini(props: MarketNewsCardProps) {
   return (
     <div
       onClick={() => openNews(props)}
-      className="w-full p-[20px] flex flex-col border-[1px] border-white/10 rounded-[12px] bg-white/[.03] shadow-[0_8_32px_rgba(0,0,0,0.37)] cursor-pointer hover:-translate-y-[2px] hover:shadow-[0_0_20px_rgba(173,198,255,0.3)] transition-all duration-200"
+      className="w-full p-[20px] flex flex-col border-[1px] border-white/10 rounded-[12px] bg-white/[.03] shadow-[0_8_32px_rgba(0,0,0,0.37)] cursor-pointer hover:-translate-y-[2px] hover:shadow-[0_0_20px_rgba(173,198,255,0.3)] transition-all duration-300"
     >
       <div className="flex flex-col">
         <div className="flex justify-between items-center">
