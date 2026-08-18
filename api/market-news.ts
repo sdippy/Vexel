@@ -1,5 +1,14 @@
 import { VercelRequest, VercelResponse } from "@vercel/node";
-import { getAllMarketNews } from "../src/server/services/marketNews.service";
+import { PrismaClient } from "@prisma/client";
+
+// Используем одинаковый экземпляр Prisma для production
+const globalForPrisma = globalThis as unknown as { prisma: PrismaClient };
+
+export const prisma = globalForPrisma.prisma || new PrismaClient();
+
+if (process.env.NODE_ENV !== "production") {
+  globalForPrisma.prisma = prisma;
+}
 
 export default async (req: VercelRequest, res: VercelResponse) => {
   // CORS заголовки
@@ -25,13 +34,30 @@ export default async (req: VercelRequest, res: VercelResponse) => {
   }
 
   try {
-    const limit = Number(req.query.limit) || 10;
+    // Проверка переменной окружения
+    if (!process.env.DATABASE_URL) {
+      console.error("DATABASE_URL не установлена");
+      return res.status(500).json({ 
+        error: "DATABASE_URL not configured" 
+      });
+    }
+
+    const limit = Math.min(Number(req.query.limit) || 10, 100);
     const order = req.query.order === "asc" ? "asc" : "desc";
 
-    const data = await getAllMarketNews(limit, order);
+    const data = await prisma.marketNews.findMany({
+      take: limit,
+      orderBy: {
+        createdAt: order,
+      },
+    });
+
     res.status(200).json(data);
   } catch (error) {
     console.error("Error fetching market news:", error);
-    res.status(500).json({ message: "error" });
+    res.status(500).json({ 
+      error: "Failed to fetch market news",
+      details: process.env.NODE_ENV === "development" ? String(error) : undefined
+    });
   }
 };
