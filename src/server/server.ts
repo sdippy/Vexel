@@ -5,7 +5,11 @@ import cors from "cors";
 const app = express();
 app.use(
   cors({
-    origin: ["http://localhost:5173", "http://localhost:4173"],
+    origin: [
+      "http://localhost:5173",
+      "http://localhost:4173",
+      process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "",
+    ].filter(Boolean),
     credentials: true,
   }),
 );
