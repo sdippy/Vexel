@@ -8,7 +8,7 @@ import {
 } from "lucide-react";
 
 import { getTopTopics, type MarketNews } from "@/shared/types";
-import { useMarketNews } from "@/shared/hooks/useMarketNews";
+import { useMarketNews } from "@/shared/types";
 
 import NewsCardBig from "@/shared/components/ui/news/NewsCardBig";
 import NewsCardMini from "@/shared/components/ui/news/NewsCardMini";
@@ -66,7 +66,13 @@ export default function News() {
               onClick={() =>
                 setOrder((prev) => (prev === "desc" ? "asc" : "desc"))
               }
-              className="flex items-center gap-[8px] text-[#E1E2EC] text-[16px] font-jetbrainsmono py-[8px] px-[16px] border-[1px] border-white/10 rounded-[12px] bg-white/[.03] hover:bg-black/[.03] shadow-[0_8_32px_rgba(0,0,0,0.37)] transition-all duration-200"
+              className={`flex items-center gap-[8px] h-[40px] px-[15px] rounded-full border font-jetbrainsmono text-[11px] font-bold tracking-[2px] whitespace-nowrap transition-all duration-200
+            ${
+              order === "desc"
+                ? "border-[1px] border-white/10 bg-white/[.03] text-[#C2C6D6] hover:text-[#ADC6FF] hover:border-[#65769A] hover:drop-shadow-[0_0_20px_rgba(173,198,255,0.3)]"
+                : "border-[#65769A] bg-[#303A4E] text-[#ADC6FF]"
+            }
+              `}
             >
               <AnimatePresence mode="wait">
                 <motion.div
@@ -87,7 +93,13 @@ export default function News() {
             </button>
             <button
               onClick={() => refetch()}
-              className="flex items-center gap-[8px] text-[#E1E2EC] text-[16px] font-jetbrainsmono py-[8px] px-[16px] border-[1px] border-white/10 rounded-[12px] bg-white/[.03] hover:bg-black/[.03] shadow-[0_8_32px_rgba(0,0,0,0.37)]"
+              className={`flex items-center gap-[8px] h-[40px] px-[15px] rounded-full border font-jetbrainsmono text-[11px] font-bold tracking-[2px] whitespace-nowrap transition-all duration-200
+            ${
+              isFetching
+                ? "border-[#65769A] bg-[#303A4E] text-[#ADC6FF]"
+                : "border-[1px] border-white/10 bg-white/[.03] text-[#C2C6D6] hover:text-[#ADC6FF] hover:border-[#65769A] hover:drop-shadow-[0_0_20px_rgba(173,198,255,0.3)]"
+            }
+              `}
             >
               <motion.div
                 animate={isFetching ? { rotate: 360 } : { rotate: 0 }}

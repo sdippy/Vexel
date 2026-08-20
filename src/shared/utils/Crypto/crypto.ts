@@ -27,3 +27,12 @@ export function getCryptoTheme(input: string): CryptoTheme {
 export function getCryptoSymbol(input: string): string {
   return getCrypto(input).symbol;
 }
+
+export function getCryptoAlias(symbol: string): string {
+  const crypto =
+    cryptoRegistry[symbol.toUpperCase() as keyof typeof cryptoRegistry];
+
+  const alias = crypto?.aliases[0] ?? symbol;
+
+  return alias.charAt(0).toUpperCase() + alias.slice(1);
+}

@@ -6,6 +6,7 @@ import { NavigationLayout } from "@/shared/components/layout/NavigationLayout";
 const Dashboard = lazy(() => import("@/pages/Dashboard"));
 const Markets = lazy(() => import("@/pages/Markets"));
 const News = lazy(() => import("@/pages/News"));
+const Watchlist = lazy(() => import("@/pages/Watchlist"));
 
 export const router = createBrowserRouter([
   {
@@ -29,6 +30,14 @@ export const router = createBrowserRouter([
         element: (
           <Suspense fallback={<div></div>}>
             <Markets />
+          </Suspense>
+        ),
+      },
+      {
+        path: "Watchlist",
+        element: (
+          <Suspense fallback={<div></div>}>
+            <Watchlist />
           </Suspense>
         ),
       },

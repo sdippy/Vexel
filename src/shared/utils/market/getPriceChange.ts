@@ -10,11 +10,15 @@ export function getCurrentPriceFormat(data: number[]) {
 }
 
 export function getPreviousPrice(data: number[]) {
-  return data[data.length - 2];
+  return data[0];
 }
 
-export function getPriceChange(currentPrice: number, previousPrice: number) {
-  const change = ((currentPrice - previousPrice) / previousPrice) * 100;
+export function getPriceChange(
+  currentPrice: number,
+  previousPrice: number,
+) {
+  const change =
+    ((currentPrice - previousPrice) / previousPrice) * 100;
 
   const normalized = Math.abs(change) < 0.005 ? 0 : change;
   const sign = normalized > 0 ? "+" : "";
@@ -22,6 +26,11 @@ export function getPriceChange(currentPrice: number, previousPrice: number) {
   return `${sign}${normalized.toFixed(2)}%`;
 }
 
-export function getPriceColor(currentPrice: number, previousPrice: number) {
-  return currentPrice >= previousPrice ? "text-[#4AE176]" : "text-[#FFB4AB]";
+export function getPriceColor(
+  currentPrice: number,
+  previousPrice: number,
+) {
+  return currentPrice >= previousPrice
+    ? "text-[#4AE176]"
+    : "text-[#FFB4AB]";
 }

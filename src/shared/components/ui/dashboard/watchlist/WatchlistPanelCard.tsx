@@ -3,7 +3,7 @@ import { memo } from "react";
 import { NavLink } from "react-router-dom";
 import SparklineChart from "./SparklineChart";
 import {
-  type WatchlistItem,
+  type WatchlistItemPrice,
   getCurrentPrice,
   getPreviousPrice,
   getPriceChange,
@@ -15,9 +15,7 @@ import { getCryptoTheme, getCryptoSymbol } from "@/shared/utils/Crypto/crypto";
 
 import { CryptoIcon } from "@/shared/utils/Crypto/CryptoIcon";
 
-type WatchlistPanelCardProps = WatchlistItem;
-
-function WatchlistPanelCard(props: WatchlistPanelCardProps) {
+function WatchlistPanelCard(props: WatchlistItemPrice) {
   const currentPrice = getCurrentPrice(props.priceData);
   const previousPrice = getPreviousPrice(props.priceData);
 

@@ -8,11 +8,9 @@ type Props = {
 
 function SparklineChart({ chartData, width = "100%", height = 20 }: Props) {
   const containerRef = useRef<HTMLDivElement | null>(null);
-
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
   const frameRef = useRef<number | null>(null);
-
   const startRef = useRef<number | null>(null);
 
   const [actualWidth, setActualWidth] = useState(
@@ -28,12 +26,6 @@ function SparklineChart({ chartData, width = "100%", height = 20 }: Props) {
 
   /*
    * Следим за изменением ширины контейнера.
-   *
-   * Это нужно для:
-   * width="full"
-   * width="100%"
-   * width="50%"
-   * width="300px"
    */
   useEffect(() => {
     const container = containerRef.current;
@@ -79,7 +71,6 @@ function SparklineChart({ chartData, width = "100%", height = 20 }: Props) {
   const stopAnimation = () => {
     if (frameRef.current !== null) {
       cancelAnimationFrame(frameRef.current);
-
       frameRef.current = null;
     }
   };
@@ -109,30 +100,19 @@ function SparklineChart({ chartData, width = "100%", height = 20 }: Props) {
 
     const stepX = actualWidth / (chartData.length - 1);
 
-    let upwardMoves = 0;
-    let downwardMoves = 0;
+    /*
+     * Определяем направление графика
+     * по первой и последней цене.
+     */
+    const firstValue = chartData[0];
+    const lastValue = chartData[chartData.length - 1];
 
-    for (let i = 1; i < chartData.length; i++) {
-      const diff = chartData[i] - chartData[i - 1];
-
-      if (Math.abs(diff) < 0.0001) {
-        continue;
-      }
-
-      if (diff > 0) {
-        upwardMoves++;
-      } else {
-        downwardMoves++;
-      }
-    }
-
-    const isPositive = upwardMoves >= downwardMoves;
+    const isPositive = lastValue >= firstValue;
 
     const color = isPositive ? "#4AE176" : "#FFB4AB";
 
     const points = chartData.map((value, index) => ({
       x: index * stepX,
-
       y: height - ((value - min) / range) * height,
     }));
 
@@ -170,14 +150,12 @@ function SparklineChart({ chartData, width = "100%", height = 20 }: Props) {
      * с учетом Retina.
      */
     canvas.width = actualWidth * dpr;
-
     canvas.height = height * dpr;
 
     /*
      * CSS-размер Canvas.
      */
     canvas.style.width = `${actualWidth}px`;
-
     canvas.style.height = `${height}px`;
 
     /*
@@ -187,7 +165,7 @@ function SparklineChart({ chartData, width = "100%", height = 20 }: Props) {
 
     const { points, color, isPositive } = processed;
 
-    const last = points[points.length - 1];
+    const lastPoint = points[points.length - 1];
 
     const draw = (timestamp: number) => {
       if (startRef.current === null) {
@@ -225,7 +203,7 @@ function SparklineChart({ chartData, width = "100%", height = 20 }: Props) {
         ctx.lineTo(point.x, point.y);
       }
 
-      ctx.lineTo(last.x, height);
+      ctx.lineTo(lastPoint.x, height);
 
       ctx.closePath();
 
@@ -242,7 +220,6 @@ function SparklineChart({ chartData, width = "100%", height = 20 }: Props) {
       ctx.lineWidth = 1.5;
 
       ctx.lineCap = "round";
-
       ctx.lineJoin = "round";
 
       ctx.beginPath();
@@ -255,7 +232,6 @@ function SparklineChart({ chartData, width = "100%", height = 20 }: Props) {
         }
 
         const p1 = points[i];
-
         const p2 = points[i + 1];
 
         const segment = Math.min(1, drawUntil - i);
@@ -268,7 +244,6 @@ function SparklineChart({ chartData, width = "100%", height = 20 }: Props) {
 
         ctx.lineTo(
           p1.x + (p2.x - p1.x) * segment,
-
           p1.y + (p2.y - p1.y) * segment,
         );
       }
@@ -290,8 +265,7 @@ function SparklineChart({ chartData, width = "100%", height = 20 }: Props) {
   }, [processed, actualWidth, height]);
 
   /*
-   * Определяем CSS width
-   * контейнера.
+   * Определяем CSS width контейнера.
    */
   const containerWidth =
     typeof width === "number"

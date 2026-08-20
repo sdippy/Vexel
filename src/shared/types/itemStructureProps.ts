@@ -1,9 +1,4 @@
-export type WatchlistItem = {
-  id: number;
-  nameCoin: string;
-  priceData: number[];
-};
-
+// Market types
 export type MarketMoversItem = {
   id: number;
   label: string;
@@ -40,6 +35,41 @@ export type MarketNewsTopic = {
   topic: string;
   count: number;
 };
+
+// Watchlist types
+export type Watchlist = {
+  id: string;
+  userId: string;
+  name: string;
+  isGlobal: boolean;
+  createdAt: string;
+}
+
+export type WatchlistItem = {
+  id: string;
+  watchlistId: string;
+  assetTokenId: string;
+  createdAt: string;
+  priceData: number[];
+}
+
+// Fix price data on API response to match the WatchlistItemPrice type
+export type WatchlistItemPrice = {
+  id: number;
+  nameCoin: string;
+  priceData: number[];
+};
+
+export type AssetsWatchlistCategory = {
+  id: string;
+  name: string;
+};
+
+// Coin types
+export type AssetToken = {
+  id: string;
+  symbol: string;
+}
 
 export type NotificationItem = {
   id: number;
