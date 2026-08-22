@@ -1,5 +1,5 @@
 import type { Request, Response } from "express";
-import { getAllWatchlistGlobal, getAllWatchlistUser } from "../services/watchlist.service";
+import { getAllWatchlistGlobal, getAllWatchlistUser, getAllWatchlistItems } from "../services/watchlist.service";
 
 // Global Watchlist Controller
 export async function getWatchlistGlobalController(req: Request, res: Response) {
@@ -13,7 +13,6 @@ export async function getWatchlistGlobalController(req: Request, res: Response) 
     res.status(500).json({ message: "error" });
   }
 }
-
 
 // User Watchlist Controller
 export async function getWatchlistUserController(
@@ -55,6 +54,50 @@ export async function getWatchlistUserController(
 
     res.status(500).json({
       message: "Failed to get watchlists",
+    });
+  }
+}
+
+// watchlistItems Controller
+export async function getWatchlistItemsController(
+  req: Request,
+  res: Response,
+) {
+  try {
+    const { watchlistId } = req.params;
+    
+    if (typeof watchlistId !== "string") {
+  return res.status(400).json({
+    message: "Invalid watchlistId",
+  });
+}
+
+    const order =
+      req.query.order === "asc" ? "asc" : "desc";
+
+    const limit =
+      typeof req.query.limit === "string"
+        ? Number(req.query.limit)
+        : undefined;
+
+    const offset =
+      typeof req.query.offset === "string"
+        ? Number(req.query.offset)
+        : undefined;
+
+    const data = await getAllWatchlistItems({
+      watchlistId,
+      order,
+      limit,
+      offset,
+    });
+
+    res.json(data);
+  } catch (e) {
+    console.error(e);
+
+    res.status(500).json({
+      message: "Failed to get watchlistItems",
     });
   }
 }

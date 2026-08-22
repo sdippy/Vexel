@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 import { ArrowDownNarrowWide, ArrowUpNarrowWide, RotateCw } from "lucide-react";
@@ -6,82 +6,99 @@ import { ArrowDownNarrowWide, ArrowUpNarrowWide, RotateCw } from "lucide-react";
 import {
   useWatchlistGlobal,
   useWatchlistUser,
-  type WatchlistItem,
+  useWatchlistItems,
+  useWatchlistMarketData,
 } from "@/shared/types";
 
 import WatchlistList from "@/shared/components/ui/watchlist/WatchlistList";
 import CategoryTabs from "@/shared/components/ui/watchlist/CategoryTabs";
 
-// Watchlist label category
-// fetch watchlist where isGlobal = true (standart pack watchlist) (id, name)
-// logic fetch watchlistID, Name where userId = userId_uuid (Получение всех ватчлистов юзера)
-
-// const DataCategoriesGlobal: AssetsWatchlistCategory[] = [
-//   { id: "all", name: "All Assets" },
-//   { id: "defi", name: "DeFi" },
-//   { id: "gaming", name: "Gaming" },
-//   { id: "ai", name: "AI & Data" },
-// ];
-
-// fetch WatchlistItem where watchlistId = watchlist_uuid (Получение всех айтемов ватчлиста по айди ватчлиста)
-
-// fetch WatchlistItem where watchlistId = watchlist_uuid (Получение всех айтемов global ватчлиста по айди global ватчлиста)
-
-const dataWatchlistItem: WatchlistItem[] = [
-  {
-    id: "7a2f9c84-13d6-4e5b-b0a7-62c8f1d93420",
-    watchlistId: "1",
-    assetTokenId: "BTC",
-    createdAt: "1",
-    priceData: [1, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-  },
-  {
-    id: "7a3f9c84-13d6-4e5b-b0a7-62c8f1d93420",
-    watchlistId: "1",
-    assetTokenId: "ETH",
-    createdAt: "1",
-    priceData: [1, 1, 2, 3, 4, 5, 6, 6, 5, 5, 4],
-  },
-];
-
 export default function Watchlist() {
-  // const { data = [], refetch, isFetching, isLoading } = useWatchlistGlobal();
-
+  // (Получение всех глобальных ватчлистов)
   const {
     data: globalWatchlists = [],
     refetch: refetchGlobal,
     isFetching: isFetchingGlobal,
+    isLoading: isLoadingGlobal,
   } = useWatchlistGlobal();
 
+  // (Получение всех ватчлистов юзера)
   const {
     data: userWatchlists = [],
     refetch: refetchUser,
     isFetching: isFetchingUser,
+    isLoading: isLoadingUser,
   } = useWatchlistUser();
 
-  const [order, setOrder] = useState<"asc" | "desc" | null>(null);
-
+  // (Общий массив ватчлистов)
   const watchlists = [...globalWatchlists, ...userWatchlists];
 
-  const sortedWatchlists =
-    order === null
-      ? watchlists
-      : [...watchlists].sort((a, b) => {
-          if (order === "asc") {
-            return a.name.localeCompare(b.name);
-          }
-
-          return b.name.localeCompare(a.name);
-        });
-
-  const isFetching = isFetchingGlobal || isFetchingUser;
-  const refetch = async () => {
-    await Promise.all([refetchGlobal(), refetchUser()]);
-  };
-
+  // (Активное состояние категории ватчлиста)
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
 
-  const activeId = activeCategory ?? globalWatchlists[0]?.id;
+  useEffect(() => {
+    if (activeCategory === null && watchlists.length > 0) {
+      setActiveCategory(watchlists[0].id);
+    }
+  }, [watchlists, activeCategory]);
+
+  const activeId = activeCategory ?? watchlists[0]?.id;
+
+  // (Получение всех токенов ватчлиста)
+  const {
+    data: WatchlistItems = [],
+    refetch: refetchWatchlistItems,
+    isFetching: isFetchingWatchlistItems,
+    isLoading: isLoadingWatchlistItems,
+  } = useWatchlistItems({
+    watchlistId: activeId,
+    order: "asc",
+  });
+
+  // (Получение цен на токены)
+  const {
+    data: marketData = {},
+    refetch: refetchWatchlistMarketData,
+    isFetching: isFetchingWatchlistMarketData,
+    isLoading: isLoadingWatchlistMarketData,
+  } = useWatchlistMarketData(activeId);
+
+  // Состояние фильтра asc | desc
+  const [order, setOrder] = useState<"asc" | "desc" | null>(null);
+
+  // Сортировка
+  const sortedWatchlistItems = [...WatchlistItems].sort((a, b) => {
+    return order === "desc"
+      ? b.assetToken.symbol.localeCompare(a.assetToken.symbol)
+      : a.assetToken.symbol.localeCompare(b.assetToken.symbol);
+  });
+
+  // Состояние загрузки api и получение данных
+  const isFetching =
+    isFetchingGlobal ||
+    isFetchingUser ||
+    isFetchingWatchlistItems ||
+    isFetchingWatchlistMarketData;
+
+  // Перезагрузка api и получение данных
+  const refetch = async () => {
+    await Promise.all([
+      refetchGlobal(),
+      refetchUser(),
+      refetchWatchlistItems(),
+      refetchWatchlistMarketData(),
+    ]);
+  };
+
+  // Состояние загрузки страницы
+  const isLoading =
+    isLoadingGlobal ||
+    isLoadingUser ||
+    isLoadingWatchlistItems ||
+    isLoadingWatchlistMarketData;
+
+  // Отображение скелетона во время загрузки страницы
+  // if (isLoading) return <WatchlistSkeleton />;
 
   // filter assets by category
   // const filteredAssets =
@@ -95,7 +112,7 @@ export default function Watchlist() {
     <div className="flex flex-col gap-[32px]">
       <div className="flex justify-between">
         <CategoryTabs
-          categoriesGlobal={sortedWatchlists}
+          categoriesGlobal={watchlists}
           activeCategory={activeId ?? ""}
           onCategoryChange={setActiveCategory}
         />
@@ -106,7 +123,7 @@ export default function Watchlist() {
             }
             className={`flex items-center gap-[8px] h-[40px] px-[15px] rounded-full border font-jetbrainsmono text-[11px] font-bold tracking-[2px] whitespace-nowrap transition-all duration-200
             ${
-              order !== null
+              order === "desc"
                 ? "border-[#65769A] bg-[#303A4E] text-[#ADC6FF]"
                 : "border-[1px] border-white/10 bg-white/[.03] text-[#C2C6D6] hover:text-[#ADC6FF] hover:border-[#65769A] hover:drop-shadow-[0_0_20px_rgba(173,198,255,0.3)]"
             }
@@ -157,7 +174,10 @@ export default function Watchlist() {
           </button>
         </div>
       </div>
-      <WatchlistList dataWatchlistItem={dataWatchlistItem} />
+      <WatchlistList
+        dataWatchlistItem={sortedWatchlistItems}
+        marketPrices={marketData}
+      />
     </div>
   );
 }

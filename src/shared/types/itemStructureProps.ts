@@ -45,12 +45,41 @@ export type Watchlist = {
   createdAt: string;
 }
 
+export type WatchlistItemProps = {
+  id: string;
+  createdAt: string;
+  priceData: number[];
+  assetToken:{
+    id: string;
+    symbol: string;
+    name: string;
+    slug: string;
+    imageUrl: string;
+    color: string;
+  }
+}
+
+export type MarketData = {
+  usd: number;
+  usd_24h_change: number;
+  chart: number[];
+};
+
+export type MarketPrices = Record<string, MarketData>;
+
+// export type MarketPrices = Record<
+//   string,
+//   {
+//     usd: number;
+//     usd_24h_change: number;
+//   }
+// >;
+
 export type WatchlistItem = {
   id: string;
   watchlistId: string;
   assetTokenId: string;
   createdAt: string;
-  priceData: number[];
 }
 
 // Fix price data on API response to match the WatchlistItemPrice type
@@ -69,6 +98,10 @@ export type AssetsWatchlistCategory = {
 export type AssetToken = {
   id: string;
   symbol: string;
+  name: string;
+  slug: string;
+  imageUrl: string;
+  color: string;
 }
 
 export type NotificationItem = {

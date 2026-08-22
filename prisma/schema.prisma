@@ -143,7 +143,12 @@ model Portfolio {
 
 model AssetToken {
   id        String   @id @default(uuid())
-  symbol    String   @unique
+  symbol    String
+  name      String
+  slug      String  @unique
+  imageUrl  String
+  color     String
+
 
   transactions Transaction[]
   watchlistItems WatchlistItem[]

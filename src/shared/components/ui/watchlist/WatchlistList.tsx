@@ -1,18 +1,32 @@
 import WatchlistCard from "@/shared/components/ui/watchlist/WatchlistCard";
 import WatchlistAddCard from "@/shared/components/ui/watchlist/WatchlistAddCard";
 
-import { type WatchlistItem } from "@/shared/types";
+import { type WatchlistItemProps, type MarketPrices } from "@/shared/types";
 
 type Props = {
-  dataWatchlistItem: WatchlistItem[];
+  dataWatchlistItem: WatchlistItemProps[];
+  marketPrices: MarketPrices;
 };
 
-export default function WatchlistList({ dataWatchlistItem }: Props) {
+export default function WatchlistList({
+  dataWatchlistItem,
+  marketPrices,
+}: Props) {
   return (
-    <div className="w-full h-full flex gap-[16px]">
-      {dataWatchlistItem.map((item) => (
-        <WatchlistCard key={item.id} {...item} />
-      ))}
+    <div className="w-full h-full grid grid-cols-3 gap-[16px]">
+      {dataWatchlistItem.map((item) => {
+        const marketData = marketPrices[item.assetToken.slug];
+
+        return (
+          <WatchlistCard
+            key={item.id}
+            {...item}
+            marketPrice={marketData?.usd}
+            marketPriceChange={marketData?.usd_24h_change}
+            priceData={marketData?.chart ?? []}
+          />
+        );
+      })}
 
       <WatchlistAddCard />
     </div>

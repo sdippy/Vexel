@@ -55,3 +55,54 @@ export async function getAllWatchlistUser({
     }),
   });
 }
+
+// WatchlistItem
+type GetAllWatchlistItemsParams = {
+  watchlistId: string;
+  order?: "asc" | "desc";
+  limit?: number;
+  offset?: number;
+};
+
+export async function getAllWatchlistItems({
+  watchlistId,
+  order = "desc",
+  limit,
+  offset,
+}: GetAllWatchlistItemsParams) {
+  return prisma.watchlistItem.findMany({
+    where: {
+      watchlistId,
+    },
+
+    select: {
+    id: true,
+    createdAt: true,
+
+    assetToken: {
+        select: {
+          id: true,
+          symbol: true,
+          name: true,
+          slug: true,
+          imageUrl: true,
+          color: true,
+        },
+      },
+    },
+
+    orderBy: {
+      assetToken: {
+        symbol: order,
+      },
+  },
+
+    ...(limit !== undefined && {
+      take: limit,
+    }),
+
+    ...(offset !== undefined && {
+      skip: offset,
+    }),
+  });
+}

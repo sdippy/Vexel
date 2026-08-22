@@ -1,6 +1,8 @@
 import express from "express";
 import newsRoutes from "./routes/marketNews.route";
 import watchlistRoutes from "./routes/watchlist.route";
+import assetTokensRoutes from "./routes/assetTokens.route";
+import marketRoutes from "./routes/market.routes";
 import cors from "cors";
 
 const app = express();
@@ -16,6 +18,8 @@ app.use(
 );
 app.use("/api/market-news", newsRoutes);
 app.use("/api/watchlist", watchlistRoutes);
+app.use("/api/asset-tokens", assetTokensRoutes);
+app.use("/api", marketRoutes);
 
 app.listen(3001, () => {
   console.log("Server running");

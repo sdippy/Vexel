@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getWatchlistGlobal, getWatchlistUser, type GetWatchlistsParams, } from "@/shared/services/fetchWatchlist";
+import { getWatchlistGlobal, getWatchlistUser, type GetWatchlistsParams, getWatchlistItems, type GetWatchlistItemsParams, } from "@/shared/services/fetchWatchlist";
 
 // Global watchlist query
 export function useWatchlistGlobal(order: "asc" | "desc" = "asc") {
@@ -9,7 +9,6 @@ export function useWatchlistGlobal(order: "asc" | "desc" = "asc") {
   });
 }
 
-
 // User watchlist query
 export function useWatchlistUser(
   params: GetWatchlistsParams = {},
@@ -17,5 +16,16 @@ export function useWatchlistUser(
   return useQuery({
     queryKey: ["watchlist", "user", params],
     queryFn: () => getWatchlistUser(params),
+  });
+}
+
+// Watchlist item
+export function useWatchlistItems(
+  params: GetWatchlistItemsParams,
+) {
+  return useQuery({
+    queryKey: ["watchlistItems", params],
+    queryFn: () => getWatchlistItems(params),
+    enabled: Boolean(params.watchlistId),
   });
 }
