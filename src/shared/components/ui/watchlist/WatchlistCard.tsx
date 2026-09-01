@@ -30,7 +30,7 @@ function WatchlistCard({
     marketPriceChange !== undefined ? getPriceChange(marketPriceChange) : "--";
 
   return (
-    <div className="flex flex-col gap-[16px] p-5 border-[1px] border-white/10 rounded-[12px] bg-white/[.03] shadow-[0_8px_32px_rgba(0,0,0,0.37)]">
+    <div className="flex flex-col gap-[16px] p-5 border-[1px] border-white/10 rounded-[12px] bg-white/[.03] shadow-[0_8px_32px_rgba(0,0,0,0.37)] hover:border-[#ADC6FF]/50 hover:-translate-y-[2px] hover:shadow-[0_0_20px_rgba(173,198,255,0.3)] transition-all duration-200 cursor-pointer">
       <div className="flex justify-between w-full">
         <div className="flex gap-[12px] items-center">
           <div

@@ -7,9 +7,9 @@ import TopMovers from "@/shared/components/ui/dashboard/section/TopMovers";
 import DashboardSkeleton from "@/shared/components/ui/skeleton/dashboard-skeleton/DashboardSkeleton";
 
 import { useMarketNews } from "@/shared/hooks/useMarketNews";
-// import другие query
 
 export default function Dashboard() {
+  // (Скелетон загрузка)
   const market = useMarketNews(2);
   const isLoading = market.isLoading;
 

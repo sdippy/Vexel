@@ -1,6 +1,7 @@
 import type { Request, Response } from "express";
 import { getAssetTokens } from "../services/assetTokens.service"
 
+// (Контроллер получения информации о крипте)
 export async function getAssetTokensController(
   req: Request,
   res: Response,

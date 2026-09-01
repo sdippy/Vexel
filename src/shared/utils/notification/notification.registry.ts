@@ -11,6 +11,7 @@ export const notificationRegistry: NotificationRegistry = {
       textColor: "text-[#4AE176]",
       bgColor: "bg-[#4AE176]/10",
       borderColor: "border-[#4AE176]/20",
+      borderColorL: "border-[#4AE176]",
     },
     aliases: ["price breakout", "breakout", "price surge", "volatility spike"],
   },
@@ -22,6 +23,7 @@ export const notificationRegistry: NotificationRegistry = {
       textColor: "text-[#ADC6FF]",
       bgColor: "bg-[#ADC6FF]/10",
       borderColor: "border-[#ADC6FF]/20",
+      borderColorL: "border-[#ADC6FF]",
     },
     aliases: [
       "liquidity signal",
@@ -38,6 +40,7 @@ export const notificationRegistry: NotificationRegistry = {
       textColor: "text-[#FF5451]",
       bgColor: "bg-[#FF5451]/10",
       borderColor: "border-[#FF5451]/20",
+      borderColorL: "border-[#FF5451]",
     },
     aliases: [
       "downside risk",

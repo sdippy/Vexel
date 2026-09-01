@@ -1,3 +1,4 @@
+// (api coingecko для получения цен на крипту за 24 часа)
 import { prisma } from "../db/prisma";
 
 const COINGECKO_API_URL =
@@ -19,7 +20,7 @@ const marketCache = new Map<
   MarketCache
 >();
 
-const MARKET_CACHE_TTL = 60 * 1000; // 1 минута
+const MARKET_CACHE_TTL = 5 * 60 * 1000; // 5 минут
 
 const chartCache = new Map<
   string,

@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import type { MarketNews } from "@/shared/types";
 
+// const modal store
 interface ModalStore {
   isModalOpen: boolean;
   selectedNews: MarketNews | null;

@@ -1,3 +1,5 @@
+// (Серив получения новостей)
+
 import { prisma } from "../db/prisma";
 
 export async function getAllMarketNews(

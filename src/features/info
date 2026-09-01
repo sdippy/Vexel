@@ -1,8 +1,0 @@
-features/
-  watchlist/
-    model.ts
-    hooks.ts
-    api.ts
-
-  market/
-  portfolio/

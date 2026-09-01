@@ -6,6 +6,7 @@ import {
 
 const router = Router();
 
+// (Роут получения информации о крипте (Цены) с api coingecko)
 router.get(
   "/watchlist/:watchlistId/market",
   getWatchlistMarketDataController,

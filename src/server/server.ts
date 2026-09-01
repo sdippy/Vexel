@@ -9,7 +9,9 @@ const app = express();
 app.use(
   cors({
     origin: [
-      "http://localhost:5173",
+      // dev build перенаправление
+      "http://localhost:5173", 
+      // preview build перенаправление
       "http://localhost:4173",
       process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "",
     ].filter(Boolean),

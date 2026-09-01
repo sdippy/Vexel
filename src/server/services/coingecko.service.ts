@@ -1,3 +1,4 @@
+// (api coingecko для получения цен на крипту)
 const COINGECKO_API_URL = "https://api.coingecko.com/api/v3";
 
 export async function getCoinsPrices(slugs: string[]) {

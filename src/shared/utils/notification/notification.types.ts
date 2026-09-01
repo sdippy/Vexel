@@ -14,6 +14,7 @@ export type NotificationTypeTheme = {
   textColor: string;
   bgColor: string;
   borderColor: string;
+  borderColorL: string;
 };
 
 export type NotificationTypeItem = {

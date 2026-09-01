@@ -16,10 +16,13 @@ import NewsTopic from "@/shared/components/ui/news/NewsTopic";
 import NewsSkeleton from "@/shared/components/ui/skeleton/news-skeleton/NewsSkeleton";
 
 export default function News() {
+  // (Хранилище новостей)
   const { data = [], refetch, isFetching, isLoading } = useMarketNews(10);
 
+  // (Логика сортировки)
   const [order, setOrder] = useState<"asc" | "desc">("desc");
 
+  // (Сохранение сортированных данных в памяти)
   const sortedData = useMemo(() => {
     return [...data].sort((a, b) => {
       const t1 = new Date(a.createdAt).getTime();
@@ -29,8 +32,10 @@ export default function News() {
     });
   }, [data, order]);
 
+  // (Получение последней новости)
   const latestNews = sortedData[0];
 
+  // (Расчет топиков Bullish | Bearish)
   const bullishCount = data.filter(
     (item: MarketNews) => item.typeTopic === "BULLISH",
   ).length;
@@ -39,6 +44,7 @@ export default function News() {
     (item: MarketNews) => item.typeTopic === "BEARISH",
   ).length;
 
+  // (Расчет процентов для графика)
   const total = bullishCount + bearishCount;
 
   const bullishPercent = total > 0 ? (bullishCount / total) * 100 : 0;
@@ -47,6 +53,7 @@ export default function News() {
 
   const topTopics = getTopTopics(data, 3);
 
+  // (Скелетон загрузка)
   if (isLoading) return <NewsSkeleton />;
 
   return (

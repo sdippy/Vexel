@@ -1,3 +1,4 @@
+// (Импорт криптовалюты в БД npx tsx src/scripts/importCrypto.ts)
 import { PrismaClient } from "@prisma/client";
 
 import { getCryptoColor } from "../shared/utils/Crypto/crypto";

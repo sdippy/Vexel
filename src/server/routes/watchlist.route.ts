@@ -12,25 +12,25 @@ import {
 
 const router = Router();
 
-// Global watchlist
+// (Роут глобального watchlist)
 router.get(
   "/global",
   getWatchlistGlobalController,
 );
 
-// User watchlists
+// (Роут пользовательского watchlists)
 router.get(
   "/",
   getWatchlistUserController,
 );
 
-// Watchlist market data
+// (Роут к api)
 router.get(
   "/:watchlistId/market",
   getWatchlistMarketDataController,
 );
 
-// Watchlist items
+// (Роут Watchlist items)
 router.get(
   "/:watchlistId/items",
   getWatchlistItemsController,

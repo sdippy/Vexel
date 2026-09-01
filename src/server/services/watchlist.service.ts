@@ -1,6 +1,6 @@
 import { prisma } from "../db/prisma";
 
-// Global Watchlist
+// (Сервис глобального Watchlist)
 export async function getAllWatchlistGlobal(
   order: "asc" | "desc" = "desc", 
 ) {
@@ -14,7 +14,7 @@ export async function getAllWatchlistGlobal(
   });
 }
 
-// User Watchlist
+// (Сервис пользовательского Watchlist)
 type GetAllWatchlistUserParams = {
   userId: string;
   order?: "asc" | "desc";
@@ -56,7 +56,7 @@ export async function getAllWatchlistUser({
   });
 }
 
-// WatchlistItem
+// (Сервис WatchlistItem)
 type GetAllWatchlistItemsParams = {
   watchlistId: string;
   order?: "asc" | "desc";

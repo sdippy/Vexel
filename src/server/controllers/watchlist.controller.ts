@@ -1,7 +1,7 @@
 import type { Request, Response } from "express";
 import { getAllWatchlistGlobal, getAllWatchlistUser, getAllWatchlistItems } from "../services/watchlist.service";
 
-// Global Watchlist Controller
+// (Глобальный Watchlist контроллер)
 export async function getWatchlistGlobalController(req: Request, res: Response) {
   try {
     const order = req.query.order === "asc" ? "asc" : "desc";
@@ -14,7 +14,7 @@ export async function getWatchlistGlobalController(req: Request, res: Response) 
   }
 }
 
-// User Watchlist Controller
+// (Пользовательский Watchlist контроллер)
 export async function getWatchlistUserController(
   req: Request,
   res: Response,
@@ -58,7 +58,7 @@ export async function getWatchlistUserController(
   }
 }
 
-// watchlistItems Controller
+// (Watchlist items контроллер)
 export async function getWatchlistItemsController(
   req: Request,
   res: Response,

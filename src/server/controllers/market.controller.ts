@@ -4,6 +4,7 @@ import {
   getWatchlistMarketData,
 } from "../services/market.service";
 
+// (Контроллер получения информации о крипте (Цены) с api coingecko)
 export async function getWatchlistMarketDataController(
   req: Request,
   res: Response,

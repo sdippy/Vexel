@@ -1,3 +1,4 @@
+// (Сервис получения информации о крипте)
 import { prisma } from "../db/prisma";
 
 export type GetAssetTokensParams = {

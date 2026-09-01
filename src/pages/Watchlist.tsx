@@ -12,6 +12,10 @@ import {
 
 import WatchlistList from "@/shared/components/ui/watchlist/WatchlistList";
 import CategoryTabs from "@/shared/components/ui/watchlist/CategoryTabs";
+import MarketIntelligence from "@/shared/components/ui/watchlist/market-intelligence-watchlist/MarketIntelligence";
+import MarketMovers from "@/shared/components/ui/watchlist/market-movers-watchlist/MarketMovers";
+import WatchlistSmartAlerts from "@/shared/components/ui/watchlist/WatchlistSmartAllerts";
+import WatchlistAgregated from "@/shared/components/ui/watchlist/WatchlistAgregated";
 
 export default function Watchlist() {
   // (Получение всех глобальных ватчлистов)
@@ -36,6 +40,7 @@ export default function Watchlist() {
   // (Активное состояние категории ватчлиста)
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
 
+  // (Состояние выбора первой категории)
   useEffect(() => {
     if (activeCategory === null && watchlists.length > 0) {
       setActiveCategory(watchlists[0].id);
@@ -122,12 +127,12 @@ export default function Watchlist() {
               setOrder((prev) => (prev === "desc" ? "asc" : "desc"))
             }
             className={`flex items-center gap-[8px] h-[40px] px-[15px] rounded-full border font-jetbrainsmono text-[11px] font-bold tracking-[2px] whitespace-nowrap transition-all duration-200
-            ${
-              order === "desc"
-                ? "border-[#65769A] bg-[#303A4E] text-[#ADC6FF]"
-                : "border-[1px] border-white/10 bg-white/[.03] text-[#C2C6D6] hover:text-[#ADC6FF] hover:border-[#65769A] hover:drop-shadow-[0_0_20px_rgba(173,198,255,0.3)]"
-            }
-              `}
+    ${
+      order === "desc"
+        ? "border-[#65769A] bg-[#303A4E] text-[#ADC6FF]"
+        : "border-[1px] border-white/10 bg-white/[.03] text-[#C2C6D6] hover:text-[#ADC6FF] hover:border-[#65769A] hover:drop-shadow-[0_0_20px_rgba(173,198,255,0.3)]"
+    }
+  `}
           >
             <AnimatePresence mode="wait">
               <motion.div
@@ -144,7 +149,7 @@ export default function Watchlist() {
                 )}
               </motion.div>
             </AnimatePresence>
-            Filter
+            Sort by: {order === "desc" ? "(Z-A)" : "(A-Z)"}
           </button>
           <button
             onClick={() => refetch()}
@@ -178,6 +183,17 @@ export default function Watchlist() {
         dataWatchlistItem={sortedWatchlistItems}
         marketPrices={marketData}
       />
+      <div className="w-full grid grid-cols-2 gap-[24px] items-stretch">
+        <MarketIntelligence />
+        <WatchlistSmartAlerts />
+      </div>
+
+      <div className="w-full grid grid-cols-5 gap-[24px] items-stretch">
+        <div className="col-span-4">
+          <WatchlistAgregated />
+        </div>
+        <MarketMovers />
+      </div>
     </div>
   );
 }

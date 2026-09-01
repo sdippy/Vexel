@@ -1,6 +1,7 @@
 import type { Request, Response } from "express";
 import { getAllMarketNews } from "../services/marketNews.service";
 
+// (Контроллер получения новостей)
 export async function getMarketNewsController(req: Request, res: Response) {
   try {
     const limit = Number(req.query.limit) || 10;
